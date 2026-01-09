@@ -42,5 +42,6 @@ class tbl_donation(models.Model):
 class tbl_assigndonation(models.Model):
     assigndonation_date=models.DateField(auto_now_add=True)
     assigndonation_status=models.IntegerField(default=0)
+    assigndonation_description=models.CharField(max_length=100)
     volunteer_id=models.ForeignKey(tbl_volunteer,on_delete=models.CASCADE)
     place_id=models.ForeignKey(tbl_place,on_delete=models.CASCADE)

@@ -267,8 +267,8 @@ def Assign(request,aid):
     volunteerdata=tbl_volunteer.objects.get(id=aid)
     if request.method == "POST":
         place=tbl_place.objects.get(id=request.POST.get('sel_place'))    
-
-        tbl_assigndonation.objects.create(volunteer_id=volunteerdata,place_id=place)
+        description=request.POST.get('txt_description')
+        tbl_assigndonation.objects.create(volunteer_id=volunteerdata,place_id=place,assigndonation_description=description)
         return render(request,'Admin/Assign.html',{'msg':"Assigned"})
     else:
         return render(request,'Admin/Assign.html',{'district':district,
