@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Type</td>
+                <td><input type="radio" name="txt_type" value="0">Money
+                    <input type="radio" name="txt_type" value="1">Material
+                </td>
+            </tr>
+            <tr>
+                <td>Remark</td>
+                <td><input type="text" name="txt_remark" id="txt_remark"></td>
+            </tr>
+            <tr>
+                <td>Amount</td>
+                <td><input type="text" name="txt_amount" id="txt_amount"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit"></td>
+                
+            </tr>
+        </table>
+    </form>
+</body>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Volunteer:ViewDonationRequest' %}";
+</script>
+{% endif %}
+</html>

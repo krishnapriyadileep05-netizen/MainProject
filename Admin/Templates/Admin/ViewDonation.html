@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewDonation</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>Donators</td>
+                <td>Type</td>
+                <td>Remark</td>
+                <td>Amount</td>
+                <td>Date</td>
+                <td>Action</td>
+            </tr>
+            {%  for i in viewdonationdata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{% if i.user_id %}
+                    {{ i.user_id.user_name }}
+                    {% else %}
+                    {{ i.volunteer_id.volunteer_name }}
+                    {% endif %}</td>
+                <td>{{ i.donation_type }}</td>
+                <td>{{ i.donation_remark }}</td>
+                <td>{{ i.donation_amount }}</td>
+                <td>{{ i.donation_date }}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+        <table border="1" align="center">
+            <tr>
+                <td colspan="2" align="center">
+                     <img src= "{{vdata.volunteer_photo.url}}" width="300" height="300" alt="volunteer" >
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{vdata.volunteer_name}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{vdata.volunteer_email}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{vdata.volunteer_address}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{vdata.volunteer_contact}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="{% url 'Volunteer:EditProfile' %}">EditProfile /
+                    <a href="{% url 'Volunteer:ChangePassword' %}"> ChangePassword
+
+                    </td>
+                
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

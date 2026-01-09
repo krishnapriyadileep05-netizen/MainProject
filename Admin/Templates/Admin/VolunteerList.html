@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer</title>
+</head>
+
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 style="text-align: center;">Volunteer Verification</h2>
+        <table border="1" align="center">
+
+            <tr>
+                <td>SI.NO</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Photo</td>
+                <td>Proof</td>
+                <td>Address</td>
+                <td>Contact</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Emergency</td>
+                <td>Action</td>
+            </tr>
+            {% for i in pending %}
+
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.volunteer_name }}</td>
+                <td>{{ i.volunteer_email }}</td>
+                <td><img src="{{ i.volunteer_photo.url }}" width="100" height="100" alt=""></td>
+                <td><img src="{{ i.volunteer_proof.url }}" width="100" height="100" alt=""></td>
+                <td>{{ i.volunteer_address }}</td>
+                <td>{{ i.volunteer_contact }}</td>
+                <td>{{ i.place.district.district_name }}</td>
+                <td>{{ i.place.place_name }}</td>
+                <td>{% if i.volunteer_emergency == 1 %}
+                    Ready For Join Emergency Situvations
+                    {% else %}
+                    Not Ready
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'Admin:acceptlist' i.id %}">Accept /
+                        <a href="{% url 'Admin:rejectlist' i.id %}">Reject
+                        </a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <h2 style="text-align: center;">Accepted List</h2>
+        <table border="1" align="center">
+
+            <tr>
+                <td>SI.NO</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Photo</td>
+                <td>Proof</td>
+                <td>Address</td>
+                <td>Contact</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Emergency</td>
+                <td>Action</td>
+            </tr>
+
+            {% for i in accept %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.volunteer_name }}</td>
+                <td>{{ i.volunteer_email }}</td>
+                <td><img src="{{ i.volunteer_photo.url }}" width="100" height="100" alt=""></td>
+                <td><img src="{{ i.volunteer_proof.url }}" width="100" height="100" alt=""></td>
+                <td>{{ i.volunteer_address }}</td>
+                <td>{{ i.volunteer_contact }}</td>
+                <td>{{ i.place.district.district_name }}</td>
+                <td>{{ i.place.place_name }}</td>
+                <td>{% if i.volunteer_emergency == 1 %}
+                    Ready For Join Emergency Situvations
+                    {% else %}
+                    Not Ready
+                    {% endif %}</td>
+                <td><a href="{% url 'Admin:rejectlist' i.id %}">Reject
+                    </a>
+                    <br> <a href="{% url 'Admin:Assign' i.id %}">Assign Volunteer</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <h2 style="text-align: center;">Rejected List</h2>
+        <table border="1" align="center">
+
+            <tr>
+                <td>SI.NO</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Photo</td>
+                <td>Proof</td>
+                <td>Address</td>
+                <td>Contact</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Emergency</td>
+                <td>Action</td>
+            </tr>
+
+            {% for i in reject %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.volunteer_name }}</td>
+                <td>{{ i.volunteer_email }}</td>
+                <td><img src="{{ i.volunteer_photo.url }}" width="100" height="100" alt=""></td>
+                <td><img src="{{ i.volunteer_proof.url }}" width="100" height="100" alt=""></td>
+                <td>{{ i.volunteer_address }}</td>
+                <td>{{ i.volunteer_contact }}</td>
+                <td>{{ i.place.district.district_name }}</td>
+                <td>{{ i.place.place_name }}</td>
+                <td>{% if i.volunteer_emergency == 1 %}
+                    Ready For Join Emergency Situvations
+                    {% else %}
+                    Not Ready
+                    {% endif %}</td>
+                <td><a href="{% url 'Admin:acceptlist' i.id %}">Accept
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </form>
+</body>
+
+</html>

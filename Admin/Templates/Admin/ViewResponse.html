@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewResponse</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+          <tr>
+            <td>SI.NO</td>
+            
+            <td>REQUEST TYPE</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>VOLUNTEER NAME</td>
+            <td>VOLUNTEER CONTACT</td>
+            <td>DATE</td>
+        </tr>
+        {% for i in responsedata %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+           
+            <td>{{ i.request_id.request_title }}</td>
+            <td>{{i.request_id.place_id.district.district_name}}</td>
+            <td>{{i.request_id.place_id.place_name}}</td>
+            <td>{{ i.volunteer_id.volunteer_name }}</td>
+            <td>{{ i.volunteer_id.volunteer_contact }}</td>
+            <td>{{ i.response_date }}</td>
+        </tr>
+        {% endfor %}
+
+
+        </table>
+    </form>
+</body>
+</html>

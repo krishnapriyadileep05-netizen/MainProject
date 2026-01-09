@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewRequest</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        
+            <h2 style="text-align: center;">Accepted List</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>Title</td>
+                <td>Content</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Date</td>
+                <td>To Date</td>
+                <td>Action</td>
+            </tr>
+            {% for i in requestdata %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.request_title}}</td>
+                <td>{{i.request_content}}</td>
+                <td>{{i.place_id.district.district_name}}</td>
+                <td>{{i.place_id.place_name}}</td>
+                <td>{{i.request_date}}</td>
+                <td>{{i.request_todate}}</td>
+                <td><a href="{% url 'Volunteer:Join' i.id %}">Join</a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Volunteer:ViewRequest' %}";
+</script>
+    {% endif %}
+</html>

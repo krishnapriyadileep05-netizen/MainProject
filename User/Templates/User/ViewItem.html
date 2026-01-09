@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewItem</title>
+</head>
+<body>
+    <form action="" method="post">
+     {% csrf_token %}
+     <h2 style="text-align: center;">View Items</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>Name</td>
+                <td>Count</td>
+                <td>Action</td>
+            </tr>
+            {% for i in itemdata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.donationitems_name }}</td>
+                <td>{{ i.donationitems_count }}</td>
+                <td><a href="{% url 'User:Donate' i.id %}">Donate</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewDonation</title>
+</head>
+<body>
+    <form action="" method="post">
+          {% csrf_token %}
+  <h2 style="text-align: center;">Donation Request</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Details</td>
+                <td>Action</td>
+            </tr>
+            {% for i in requestdata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.place_id.district.district_name }}</td>
+                <td>{{ i.place_id.place_name }}</td>
+                <td>{{ i.donationrequest_details }}</td>
+                <td><a href="{% url 'User:ViewItem' i.id %}">View Item</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
