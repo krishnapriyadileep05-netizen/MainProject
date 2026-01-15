@@ -271,5 +271,4 @@ def Assign(request,aid):
         tbl_assigndonation.objects.create(volunteer_id=volunteerdata,place_id=place,assigndonation_description=description)
         return render(request,'Admin/Assign.html',{'msg':"Assigned"})
     else:
-        return render(request,'Admin/Assign.html',{'district':district,
-                                                   'volunteerdata':volunteerdata})
+        return render(request,'Admin/Assign.html',{'district':district,'volunteerdata':volunteerdata})
