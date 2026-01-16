@@ -7,5 +7,5 @@ urlpatterns = [path('UserRegistration/',views.UserRegistration,name="UserRegistr
                path('Login/',views.Login,name="Login"),
                path('AjaxPlace/',views.AjaxPlace,name="ajaxplace"),
                path('Volunteer/',views.Volunteer,name="Volunteer"),
-               path('index/',views.index,name="index"),
+               path('indexpage/',views.indexpage,name="indexpage"),
                 ]
