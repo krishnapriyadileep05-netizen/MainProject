@@ -5,6 +5,11 @@ from User.models import *
 from Volunteer.models import *
 
 # Create your views here.
+def logout(request):
+    del request.session["aid"]
+    return redirect("Guest:Login")
+
+
 def AdminRegistration(request):
     data=tbl_admin.objects.all()
 
@@ -23,22 +28,29 @@ def AdminRegistration(request):
         return render(request,'Admin/AdminRegistration.html',{"AdminRegistration":data})
 
 def HomePage(request):
-    return render(request,"Admin/HomePage.html")
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        return render(request,"Admin/HomePage.html")
 
 def District(request):
-    data=tbl_district.objects.all()
-
-    if request.method=="POST":
-        district=request.POST.get("txt_name")
-        checkdistrict = tbl_district.objects.filter(district_name=district).count()
-        if checkdistrict > 0:
-            return render(request,'Admin/District.html',{'msg':"District Already Exist"})
-        else:
-             tbl_district.objects.create(district_name=district)
-
-        return render(request,'Admin/District.html',{'msg':'data inserted'})
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
     else:
-        return render(request,'Admin/District.html',{"district":data})
+
+        data=tbl_district.objects.all()
+        if request.method=="POST":
+            district=request.POST.get("txt_name")
+            checkdistrict = tbl_district.objects.filter(district_name=district).count()
+            if checkdistrict > 0:
+                return render(request,'Admin/District.html',{'msg':"District Already Exist"})
+            else:
+                tbl_district.objects.create(district_name=district)
+
+            return render(request,'Admin/District.html',{'msg':'data inserted'})
+            
+        else:
+            return render(request,'Admin/District.html',{"district":data})
     
 def Category(request):
     data=tbl_category.objects.all()
@@ -93,16 +105,19 @@ def editAdminRegistration(request,id):
         return render(request,'Admin/AdminRegistration.html',{'editdata':editdata})
 
 def Place(request):
-    data=tbl_district.objects.all()
-    placedata=tbl_place.objects.all()
-    if request.method=="POST":
-        place=request.POST.get("txt_name")
-        district = tbl_district.objects.get(id=request.POST.get("sel_district"))
-        tbl_place.objects.create(place_name=place, district=district)
-
-        return render(request,'Admin/Place.html',{'msg':'data inserted'})
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
     else:
-        return render(request,'Admin/Place.html',{"district":data,'place':placedata})
+        data=tbl_district.objects.all()
+        placedata=tbl_place.objects.all()
+        if request.method=="POST":
+            place=request.POST.get("txt_name")
+            district = tbl_district.objects.get(id=request.POST.get("sel_district"))
+            tbl_place.objects.create(place_name=place, district=district)
+
+            return render(request,'Admin/Place.html',{'msg':'data inserted'})
+        else:
+            return render(request,'Admin/Place.html',{"district":data,'place':placedata})
 
         
 def delplace(request,id):
@@ -151,15 +166,21 @@ def editsub(request,id):
         return render(request,'Admin/Subcategory.html',{'editdata':editdata,'category':category})
 
 def UserList(request):
-    userdata=tbl_user.objects.all()
-    return render(request,'Admin/UserList.html',{"users":userdata,})
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        userdata=tbl_user.objects.all()
+        return render(request,'Admin/UserList.html',{"users":userdata,})
 
 
 def VolunteerList(request):
-    pending=tbl_volunteer.objects.filter(volunteer_status = 0)
-    accept=tbl_volunteer.objects.filter(volunteer_status = 1)
-    reject=tbl_volunteer.objects.filter(volunteer_status = 2)
-    return render(request,'Admin/VolunteerList.html',{"pending":pending,'accept':accept,'reject':reject})
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        pending=tbl_volunteer.objects.filter(volunteer_status = 0)
+        accept=tbl_volunteer.objects.filter(volunteer_status = 1)
+        reject=tbl_volunteer.objects.filter(volunteer_status = 2)
+        return render(request,'Admin/VolunteerList.html',{"pending":pending,'accept':accept,'reject':reject})
     
 def acceptvolunteer(request,id):
     vdata=tbl_volunteer.objects.get(id=id)
@@ -174,9 +195,12 @@ def rejectvolunteer(request,id):
     return redirect("Admin:VolunteerList")
 
 def ViewRequest(request):
-    pending=tbl_request.objects.filter(request_status = 0)
-    accept=tbl_request.objects.filter(request_status = 1)
-    reject=tbl_request.objects.filter(request_status = 2)
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        pending=tbl_request.objects.filter(request_status = 0)
+        accept=tbl_request.objects.filter(request_status = 1)
+        reject=tbl_request.objects.filter(request_status = 2)
 
     return render(request,'Admin/ViewRequest.html',{"pending":pending,"accept":accept,"reject":reject})
 
@@ -197,19 +221,22 @@ def ViewResponse(request,id):
     return render(request,'Admin/ViewResponse.html',{"responsedata":responsedata})
 
 def Camp(request):
-    campdata=tbl_camp.objects.all()
-    district=tbl_district.objects.all()
-    place=tbl_place.objects.all()
-    if request.method=="POST":
-        details=request.POST.get("txt_details")
-        place=tbl_place.objects.get(id=request.POST.get('sel_place'))
-        volunteerdata=tbl_volunteer.objects.get(id=request.session["vid"])
-
-        tbl_camp.objects.create(camp_details=details,place_id=place,volunteer_id=volunteerdata)
-        return redirect('Admin:Camp')
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
     else:
-        return render(request,'Admin/Camp.html',{'district':district,'place':place,'camp':campdata})
-        
+        campdata=tbl_camp.objects.all()
+        district=tbl_district.objects.all()
+        place=tbl_place.objects.all()
+        if request.method=="POST":
+            details=request.POST.get("txt_details")
+            place=tbl_place.objects.get(id=request.POST.get('sel_place'))
+            volunteerdata=tbl_volunteer.objects.get(id=request.session["vid"])
+
+            tbl_camp.objects.create(camp_details=details,place_id=place,volunteer_id=volunteerdata)
+            return redirect('Admin:Camp')
+        else:
+            return render(request,'Admin/Camp.html',{'district':district,'place':place,'camp':campdata})
+            
 def Start(request,id):
     sdata=tbl_camp.objects.get(id=id)
     sdata.camp_status=1
@@ -227,18 +254,21 @@ def AssignVolunteer(request,id):
     return render(request,"Admin/AssignVolunteer.html",{'volunteerdata':volunteer})
 
 def DonationRequest(request):
-    requestdata=tbl_donationrequest.objects.all()
-    district=tbl_district.objects.all()
-    place=tbl_place.objects.all()
-    if request.method == "POST":
-        details=request.POST.get("txt_details")
-        place=tbl_place.objects.get(id=request.POST.get('sel_place'))
-
-        tbl_donationrequest.objects.create(donationrequest_details=details,place_id=place)
-        return redirect('Admin:DonationRequest')
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
     else:
-        return render(request,"Admin/DonationRequest.html",{'district':district,'place':place,'requestdata':requestdata})
-    
+        requestdata=tbl_donationrequest.objects.all()
+        district=tbl_district.objects.all()
+        place=tbl_place.objects.all()
+        if request.method == "POST":
+            details=request.POST.get("txt_details")
+            place=tbl_place.objects.get(id=request.POST.get('sel_place'))
+
+            tbl_donationrequest.objects.create(donationrequest_details=details,place_id=place)
+            return redirect('Admin:DonationRequest')
+        else:
+            return render(request,"Admin/DonationRequest.html",{'district':district,'place':place,'requestdata':requestdata})
+        
 def delrequest(request,id):
     tbl_donationrequest.objects.get(id=id).delete()
     return redirect('Admin:DonationRequest')
@@ -259,8 +289,11 @@ def delitem(request,id):
     return redirect('Admin:DonationRequest')
 
 def ViewDonation(request):
-    viewdonationdata=tbl_donation.objects.all()   
-    return render(request,'Admin/ViewDonation.html',{'viewdonationdata':viewdonationdata})
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        viewdonationdata=tbl_donation.objects.all()   
+        return render(request,'Admin/ViewDonation.html',{'viewdonationdata':viewdonationdata})
 
 def Assign(request,aid):
     district=tbl_district.objects.all()
@@ -272,3 +305,20 @@ def Assign(request,aid):
         return render(request,'Admin/Assign.html',{'msg':"Assigned"})
     else:
         return render(request,'Admin/Assign.html',{'district':district,'volunteerdata':volunteerdata})
+    
+def ViewComplaint(request):
+    complaintdata=tbl_complaint.objects.all()
+    return render(request,'Admin/ViewComplaint.html',{'complaintdata':complaintdata})
+
+def Reply(request,id):
+    userdata=tbl_user.objects.all()
+    complaintdata=tbl_complaint.objects.get(id=id)
+    if request.method == 'POST':
+        reply=request.POST.get("txt_reply")
+        complaintdata.complaint_reply=reply
+        complaintdata.complaint_status=1
+        complaintdata.save()
+        return render(request,'Admin/Reply.html',{'msg':'Replied'})
+    else:
+        return render(request,'Admin/Reply.html',{'complaintdata':complaintdata,'userdata':userdata})
+

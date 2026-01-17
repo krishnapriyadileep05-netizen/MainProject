@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Admin.models import *
 from Guest.models import *
 from User.models import *
@@ -6,6 +6,10 @@ from Volunteer.models import *
 
 
 # Create your views here.
+def logout(request):
+    del request.session["uid"]
+    return redirect("Guest:Login")
+
 def MyProfile(request):
     userdata=tbl_user.objects.get(id=request.session["uid"])
     return render(request,'User/MyProfile.html',{"userdata": userdata})
@@ -49,39 +53,51 @@ def ChangePassword(request):
         return render(request,'User/ChangePassword.html')
 
 def HomePage(request):
-    return render(request,'User/HomePage.html')
+    if "uid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        return render(request,'User/HomePage.html')
 
 def Complaint(request):
-    if request.method == "POST":
-        title=request.POST.get('txt_title')
-        description=request.POST.get('txt_description')
-        userdata=tbl_user.objects.get(id=request.session["uid"])
-        
-        tbl_complaint.objects.create(complaint_title=title,complaint_description=description,user_id=userdata,
-                                     )
-        return render(request,'User/Complaint.html',{"msg":"data inserted"})
+    if "uid" not in request.session:
+        return redirect("Guest:Login")
     else:
-        return render(request,'User/Complaint.html')
+        if request.method == "POST":
+            title=request.POST.get('txt_title')
+            description=request.POST.get('txt_description')
+            userdata=tbl_user.objects.get(id=request.session["uid"])
+            
+            tbl_complaint.objects.create(complaint_title=title,complaint_description=description,user_id=userdata,
+                                        )
+            return render(request,'User/Complaint.html',{"msg":"data inserted"})
+        else:
+            return render(request,'User/Complaint.html')
 
 def Request(request):
-    district=tbl_district.objects.all()
-    place=tbl_place.objects.all()
-    requestdata=tbl_request.objects.all()
-    if request.method == "POST":
-        title=request.POST.get('txt_title')
-        content=request.POST.get('txt_content')
-        place=tbl_place.objects.get(id=request.POST.get('sel_place'))
-        todate=request.POST.get('txt_date')
-        userdata=tbl_user.objects.get(id=request.session["uid"])
-
-        tbl_request.objects.create(request_title=title,request_content=content,place_id=place,request_todate=todate,user_id=userdata)
-        return render(request,'User/request.html',{'msg':"data inserted"})
+    if "uid" not in request.session:
+        return redirect("Guest:Login")
     else:
-        return render(request,'User/request.html',{'district':district,'place':place,'requestdata':requestdata})
+        district=tbl_district.objects.all()
+        place=tbl_place.objects.all()
+        requestdata=tbl_request.objects.all()
+        if request.method == "POST":
+            title=request.POST.get('txt_title')
+            content=request.POST.get('txt_content')
+            place=tbl_place.objects.get(id=request.POST.get('sel_place'))
+            todate=request.POST.get('txt_date')
+            userdata=tbl_user.objects.get(id=request.session["uid"])
+
+            tbl_request.objects.create(request_title=title,request_content=content,place_id=place,request_todate=todate,user_id=userdata)
+            return render(request,'User/request.html',{'msg':"data inserted"})
+        else:
+            return render(request,'User/request.html',{'district':district,'place':place,'requestdata':requestdata})
     
 def ViewDonationRequest(request):
-    requestdata=tbl_donationrequest.objects.all()
-    return render(request,'User/ViewDonationRequest.html',{'requestdata':requestdata})
+    if "uid" not in request.session:
+        return redirect("Guest:Login")
+    else:
+        requestdata=tbl_donationrequest.objects.all()
+        return render(request,'User/ViewDonationRequest.html',{'requestdata':requestdata})
 
 def ViewItem(request,id):
     itemdata=tbl_donationitems.objects.all()

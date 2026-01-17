@@ -59,6 +59,7 @@
                 <td>Place</td>
                 <td>ToDate</td>
                 <td>Date</td>
+                <td>Action</td>
             </tr>
             {% for i in requestdata %}
             <tr>
@@ -69,6 +70,7 @@
                 <td>{{ i.place_id.place_name }}</td>
                  <td>{{i.request_todate}}</td>
                 <td>{{i.request_date}}</td>
+                <td><a href="{% url 'Admin:ViewResponse' i.id %}">View Volunteer</a></td>
             </tr>
             {% endfor %}
         </table>

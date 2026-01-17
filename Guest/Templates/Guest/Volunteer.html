@@ -11,36 +11,37 @@
     <table border="1" align="center">
         <tr>
             <td>Name</td>
-            <td><input type="text" name="txt_name" id="txt_name"></td>
+            <td><input type="text"  required title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" name="txt_name" id="txt_name" placeholder="Enter Your Name"></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="email" name="txt_email" id="txt_email"></td>
+            <td><input type="email" required name="txt_email" id="txt_email" placeholder="Enter Email"></td>
         </tr>
          <tr>
             <td>Password</td>
-            <td><input type="password" name="txt_password" id="txt_password"></td>
+            <td><input type="password" required name="txt_password" id="txt_password" placeholder="Enter Password"></td>
         </tr>
         <tr>
             <td>Photo</td>
-            <td><input type="file" name="file_photo" id="file_photo"></td>
+            <td><input type="file" required name="file_photo" id="file_photo"></td>
         </tr>
         <tr>
             <td>Proof</td>
-            <td><input type="file" name="file_proof" id="file_proof"></td>
+            <td><input type="file" required name="file_proof" id="file_proof"></td>
         </tr>
         <tr>
             <td>Address</td>
-            <td><textarea name="txt_address" id="txt_address"></textarea></td>
+            <td><textarea name="txt_address" required id="txt_address" placeholder="Enter Your Address"></textarea></td>
         </tr>
          <tr>
             <td>Contact</td>
-            <td><input type="text" name="txt_contact" id="txt_contact"></td>
+            <td><input type="text" required name="txt_contact"  pattern="[7-9]{1}[0-9]{9}" 
+                title="Phone number with 7-9 and remaing 9 digit with 0-9" id="txt_contact" placeholder="Enter contact number"></td>
         </tr>
         <tr>
             <td>District</td>
-            <td><select name="sel_distirct" id="sel_distirct">
-                <option value="--select--"></option>
+            <td><select name="sel_distirct" required id="sel_distirct">
+                <option value="">--select--</option>
                 {% for i in districts %}
                 <option value="{{i.id}}">{{ i.district_name }}
 
@@ -51,12 +52,12 @@
         <tr>
             <td>Place</td>
             <td><select name="sel_place" id="sel_place">
-                <option value="--select--"></option>
+                <option value="">--select--</option>
             </select></td>
         </tr>
         <tr>
             <td>Emergency</td>
-            <td><input type="checkbox" name="txt_emergency" id="txt_emergency" value="1">Can you Handle Emergency Situation</td>
+            <td><input type="checkbox" required name="txt_emergency" id="txt_emergency" value="1">Can you Handle Emergency Situation</td>
         </tr>
         <tr>
             <td colspan="2" align="center"><input type="submit" value="Submit"></td>

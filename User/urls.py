@@ -13,4 +13,7 @@ urlpatterns = [
     path("ViewDonationRequest/",views.ViewDonationRequest,name="ViewDonationRequest"),
     path("ViewItem/<int:id>",views.ViewItem,name="ViewItem"),
     path("Donate/<int:id>",views.Donate,name="Donate"),
+    path("logout/",views.logout,name="logout"),
+
+
 ]

@@ -18,6 +18,7 @@
             <td>VOLUNTEER NAME</td>
             <td>VOLUNTEER CONTACT</td>
             <td>DATE</td>
+            <td>STATUS</td>
         </tr>
         {% for i in responsedata %}
         <tr>
@@ -29,7 +30,16 @@
             <td>{{ i.volunteer_id.volunteer_name }}</td>
             <td>{{ i.volunteer_id.volunteer_contact }}</td>
             <td>{{ i.response_date }}</td>
+            <td>{% if i.response_status == 1 %} Accepted
+                {% elif i.response_status == 2 %} On Going
+                {% elif i.response_status == 3 %} Completed
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            
         </tr>
+        
         {% endfor %}
 
 

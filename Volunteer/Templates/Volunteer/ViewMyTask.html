@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewMyTask</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>Request Title</td>
+                <td>Description</td>
+                <td>Date</td>
+                <td>To Date</td>
+                <td>Place</td>
+                <td>Action</td>
+            </tr>
+            {% for i in responsedata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.request_id.request_title }}</td>
+                <td>{{ i.request_id.request_content }}</td>
+                <td>{{ i.request_id.request_date }}</td>
+                <td>{{ i.request_id.request_todate }}</td>
+                <td>{{ i.request_id.place_id.place_name }}</td>
+                <td><a href="{% url 'Volunteer:Accepted' i.id %}">Accepted</a>
+                  <br>  <a href="{% url 'Volunteer:InProgress' i.id %}">InProgress</a>
+                  <br>  <a href="{% url 'Volunteer:Completed' i.id %}">Completed</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

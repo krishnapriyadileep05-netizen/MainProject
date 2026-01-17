@@ -1,556 +1,358 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Environmental</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/hamburgers.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-</head>
-<body>
-    <!--? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.png" alt="">
-                </div>
-            </div>
+    <head>
+        <meta charset="utf-8">
+        <title>Environs - Environmental & Nature Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
         </div>
-    </div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-        <div class="header-area">
-            <div class="main-header ">
-                <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2">
-                                <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                                </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top px-0">
+            <div class="container px-0">
+                <div class="topbar">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-8">
+                            <div class="topbar-info d-flex flex-wrap">
+                                <a href="#" class="text-light me-4"><i class="fas fa-envelope text-white me-2"></i>Example@gmail.com</a>
+                                <a href="#" class="text-light"><i class="fas fa-phone-alt text-white me-2"></i>+01234567890</a>
                             </div>
-                            <div class="col-xl-10 col-lg-10">
-                                <div class="menu-wrapper  d-flex align-items-center justify-content-end">
-                                    <!-- Main-menu -->
-                                    <div class="main-menu d-none d-lg-block">
-                                        <nav>
-                                            <ul id="navigation">                                                                                          
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About</a></li>
-                                                <li><a href="what-do.html">What we Do</a></li>
-                                                <li><a href="projects.html">Projects</a></li>
-                                                <li><a href="blog.html">Blog</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="blog_details.html">Blog Details</a></li>
-                                                        <li><a href="elements.html">Element</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <!-- Header-btn -->
-                                    <div class="header-right-btn d-none d-lg-block ml-20">
-                                        <a href="contact.html" class="btn header-btn">Make a Donation</a>
-                                    </div>
-                                </div>
-                            </div> 
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="topbar-icon d-flex align-items-center justify-content-end">
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-pinterest"></i></a>
+                                <a href="#" class="btn-square text-white me-0"><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <nav class="navbar navbar-light bg-light navbar-expand-xl">
+                    <a href="index.html" class="navbar-brand ms-3">
+                        <h1 class="text-primary display-5">Environs</h1>
+                    </a>
+                    <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto">
+                            <a href="index.html" class="nav-item nav-link">Home</a>
+                            <a href="about.html" class="nav-item nav-link">About</a>
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="causes.html" class="nav-item nav-link">Causes</a>
+                            <a href="events.html" class="nav-item nav-link">Events</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="blog.html" class="dropdown-item active">Blog</a>
+                                    <a href="gallery.html" class="dropdown-item">Gallery</a>
+                                    <a href="volunteer.html" class="dropdown-item">Volunteers</a>
+                                    <a href="donation.html" class="dropdown-item">Donation</a>
+                                    <a href="404.html" class="dropdown-item">404 Error</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
+                            <a href="" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Donate Now</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Latest News & Blog</h1>
+                <p class="fs-5 text-white mb-4">Help today because tomorrow you may be the one who needs more helping!</p>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active text-white">Blog</li>
+                </ol>    
             </div>
         </div>
         <!-- Header End -->
-    </header>
-    <main>
-        <!--? Hero Start -->
-        <div class="slider-area2">
-            <div class="slider-height2 d-flex align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="hero-cap hero-cap2 pt-70">
-                                <h2>Blog</h2>
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Blog</a></li> 
-                                    </ol>
-                                </nav>
+
+        <!-- Blog Start -->
+        <div class="container-fluid blog py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5" style="max-width: 800px;">
+                    <h5 class="text-uppercase text-primary">Latest News & Blog</h5>
+                    <h1 class="mb-0">Help today because tomorrow you may be the one who needs more helping!
+                    </h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="img/blog-1.jpg" class="img-fluid w-100" alt="">
+                                <div class="blog-info">
+                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                                    <div class="d-flex">
+                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                                    </div>
+                                </div>
+                                <div class="search-icon">
+                                    <a href="img/blog-1.jpg" data-lightbox="Blog-1" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-dark border p-4 ">
+                                <h4 class="mb-4">Save The Topic Forests</h4>
+                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
+                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="img/blog-2.jpg" class="img-fluid w-100" alt="">
+                                <div class="blog-info">
+                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                                    <div class="d-flex">
+                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                                    </div>
+                                </div>
+                                <div class="search-icon">
+                                    <a href="img/blog-2.jpg" data-lightbox="Blog-2" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-dark border p-4 ">
+                                <h4 class="mb-4">Save The Topic Forests</h4>
+                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
+                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="img/blog-3.jpg" class="img-fluid w-100" alt="">
+                                <div class="blog-info">
+                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                                    <div class="d-flex">
+                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                                    </div>
+                                </div>
+                                <div class="search-icon">
+                                    <a href="img/blog-3.jpg" data-lightbox="Blog-3" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-dark border p-4 ">
+                                <h4 class="mb-4">Save The Topic Forests</h4>
+                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
+                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="img/blog-4.jpg" class="img-fluid w-100" alt="">
+                                <div class="blog-info">
+                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                                    <div class="d-flex">
+                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                                    </div>
+                                </div>
+                                <div class="search-icon">
+                                    <a href="img/blog-4.jpg" data-lightbox="Blog-4" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-dark border p-4 ">
+                                <h4 class="mb-4">Save The Topic Forests</h4>
+                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
+                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Hero End -->
-        <!--? Blog Area Start-->
-        <section class="blog_area section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mb-5 mb-lg-0">
-                        <div class="blog_left_sidebar">
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">Google inks pact for new 35-storey office</h2>
-                                    </a>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="assets/img/blog/single_blog_2.png" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">Google inks pact for new 35-storey office</h2>
-                                    </a>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="assets/img/blog/single_blog_3.png" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">Google inks pact for new 35-storey office</h2>
-                                    </a>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="assets/img/blog/single_blog_4.png" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">Google inks pact for new 35-storey office</h2>
-                                    </a>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="assets/img/blog/single_blog_5.png" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3>15</h3>
-                                        <p>Jan</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">Google inks pact for new 35-storey office</h2>
-                                    </a>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <nav class="blog-pagination justify-content-center d-flex">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Previous">
-                                            <i class="ti-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link">1</a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a href="#" class="page-link">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Next">
-                                            <i class="ti-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+        <!-- Blog End -->
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid footer bg-dark text-body py-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item">
+                            <h4 class="mb-4 text-white">Newsletter</h4>
+                            <p class="mb-4">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
+                            <div class="position-relative mx-auto">
+                                <input class="form-control border-0 bg-secondary w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
+                                <button type="button" class="btn-hover-bg btn btn-primary position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
-                                            <div class="input-group-append">
-                                                <button class="btns" type="button"><i class="ti-search"></i></button>
-                                            </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="mb-4 text-white">Our Services</h4>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Ocean Turtle</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> White Tiger</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Social Ecology</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Loneliness</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Beauty of Life</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Present for You</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="mb-4 text-white">Volunteer</h4>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Karen Dawson</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Jack Simmons</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Michael Linden</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Simon Green</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Natalie Channing</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> Caroline Gerwig</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item">
+                            <h4 class="mb-4 text-white">Our Gallery</h4>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <div class="footer-gallery">
+                                        <img src="img/gallery-footer-1.jpg" class="img-fluid w-100" alt="">
+                                        <div class="footer-search-icon">
+                                            <a href="img/gallery-footer-1.jpg" data-lightbox="footerGallery-1" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
                                         </div>
                                     </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
-                                </form>
-                            </aside>
-                            <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Category</h4>
-                                <ul class="list cat-list">
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Resaurant food</p>
-                                            <p>(37)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Travel news</p>
-                                            <p>(10)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Modern technology</p>
-                                            <p>(03)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Product</p>
-                                            <p>(11)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Inspiration</p>
-                                            <p>21</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Health Care (21)</p>
-                                            <p>09</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_1.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">From life was you fish...</h3>
-                                        </a>
-                                        <p>January 12, 2019</p>
+                               </div>
+                               <div class="col-4">
+                                    <div class="footer-gallery">
+                                        <img src="img/gallery-footer-2.jpg" class="img-fluid w-100" alt="">
+                                        <div class="footer-search-icon">
+                                            <a href="img/gallery-footer-2.jpg" data-lightbox="footerGallery-2" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_2.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
-                                        </a>
-                                        <p>02 Hours ago</p>
+                               </div>
+                                <div class="col-4">
+                                    <div class="footer-gallery">
+                                        <img src="img/gallery-footer-3.jpg" class="img-fluid w-100" alt="">
+                                        <div class="footer-search-icon">
+                                            <a href="img/gallery-footer-3.jpg" data-lightbox="footerGallery-3" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_3.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
-                                        </a>
-                                        <p>03 Hours ago</p>
+                               </div>
+                                <div class="col-4">
+                                    <div class="footer-gallery">
+                                        <img src="img/gallery-footer-4.jpg" class="img-fluid w-100" alt="">
+                                        <div class="footer-search-icon">
+                                            <a href="img/gallery-footer-4.jpg" data-lightbox="footerGallery-4" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_4.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">Asteroids telescope</h3>
-                                        </a>
-                                        <p>01 Hours ago</p>
+                               </div>
+                                <div class="col-4">
+                                    <div class="footer-gallery">
+                                        <img src="img/gallery-footer-5.jpg" class="img-fluid w-100" alt="">
+                                        <div class="footer-search-icon">
+                                            <a href="img/gallery-footer-5.jpg" data-lightbox="footerGallery-5" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                            </aside>
-                            <aside class="single_sidebar_widget tag_cloud_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Tag Clouds</h4>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">project</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">love</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">travel</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">restaurant</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">illustration</a>
-                                    </li>
-                                </ul>
-                            </aside>
-
-                            <aside class="single_sidebar_widget instagram_feeds">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Instagram Feeds</h4>
-                                <ul class="instagram_row flex-wrap">
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="single_sidebar_widget newsletter_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
-                                <form action="#">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Subscribe</button>
-                                </form>
-                            </aside>
+                               </div>
+                               <div class="col-4">
+									<div class="footer-gallery">
+										<img src="img/gallery-footer-6.jpg" class="img-fluid w-100" alt="">
+                                        <div class="footer-search-icon">
+                                            <a href="img/gallery-footer-6.jpg" data-lightbox="footerGallery-6" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
+                                        </div>
+									</div>
+								</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Blog Area End -->
-    </main>
-    <footer>
-        <div class="footer-wrapper">
-           <!-- Footer Start-->
-           <div class="footer-area footer-padding">
-               <div class="container ">
-                   <div class="row justify-content-between">
-                       <div class="col-xl-4 col-lg-3 col-md-8 col-sm-8">
-                           <div class="single-footer-caption mb-50">
-                               <div class="single-footer-caption mb-30">
-                                   <!-- logo -->
-                                   <div class="footer-logo mb-35">
-                                       <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                   </div>
-                                   <div class="footer-tittle">
-                                       <div class="footer-pera">
-                                           <p>The automated process starts as soon as your clothes go into the machine.</p>
-                                       </div>
-                                   </div>
-                                   <!-- social -->
-                                   <div class="footer-social">
-                                       <a href="#"><i class="fab fa-twitter"></i></a>
-                                       <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                       <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4">
-                           <div class="single-footer-caption mb-50">
-                               <div class="footer-tittle">
-                                   <h4>Our solutions</h4>
-                                   <ul>
-                                       <li><a href="#">Design & creatives</a></li>
-                                       <li><a href="#">Telecommunication</a></li>
-                                       <li><a href="#">Restaurant</a></li>
-                                       <li><a href="#">Programing</a></li>
-                                       <li><a href="#">Architecture</a></li>
-                                   </ul>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
-                           <div class="single-footer-caption mb-50">
-                               <div class="footer-tittle">
-                                   <h4>Company</h4>
-                                   <ul>
-                                       <li><a href="#">About</a></li>
-                                       <li><a href="#">Review</a></li>
-                                       <li><a href="#">Insights</a></li>
-                                       <li><a href="#">Carrier</a></li>
-                                   </ul>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-xl-3 col-lg-4 col-md-6 col-sm-4">
-                           <div class="single-footer-caption mb-50">
-                               <div class="footer-tittle">
-                                   <h4>Contact us</h4>
-                                   <ul>
-                                       <li><a href="#">consulto98@gmail.com</a></li>
-                                       <li><a href="#">76/A, Green road, NYC</a></li>
-                                       <li><a href="#">Privacy Policy</a></li>
-                                       <li class="number"><a href="#">(80) 783 367-3904</a></li>
-                                   </ul>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-           <!-- footer-bottom area -->
-           <div class="footer-bottom-area">
-               <div class="container">
-                   <div class="footer-border">
-                       <div class="row d-flex align-items-center">
-                           <div class="col-xl-12 ">
-                               <div class="footer-copy-right text-center">
-                                   <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                      Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <!-- Footer End-->
-          </div>
-      </footer>
-      <!-- Scroll Up -->
-      <div id="back-top" >
-        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-    </div>
-    <!-- JS here -->
+        </div>
+        <!-- Footer End -->
+        
 
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <!-- Jquery Mobile Menu -->
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
 
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <!-- One Page, Animated-HeadLin -->
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
 
-    <!-- Date Picker -->
-    <script src="./assets/js/gijgo.min.js"></script>
-    <!-- Nice-select, sticky -->
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright py-4">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-4 text-center text-md-start mb-md-0">
+                        <span class="text-body"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="#" class="btn-hover-color btn-square text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn-hover-color btn-square text-white me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="btn-hover-color btn-square text-white me-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="btn-hover-color btn-square text-white me-2"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" class="btn-hover-color btn-square text-white me-0"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center text-md-end text-body">Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
     
-    <!-- counter , waypoint,Hover Direction -->
-    <script src="./assets/js/jquery.counterup.min.js"></script>
-    <script src="./assets/js/waypoints.min.js"></script>
-    <script src="./assets/js/jquery.countdown.min.js"></script>
-    <script src="./assets/js/hover-direction-snake.min.js"></script>
 
-    <!-- contact js -->
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
-    
-</body>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    </body>
+
 </html>
