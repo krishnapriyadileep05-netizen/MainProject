@@ -20,6 +20,10 @@ class tbl_request(models.Model):
     place_id=models.ForeignKey(tbl_place,on_delete=models.CASCADE)
     user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
 
+class tbl_feedback(models.Model):
+    feedback_date=models.DateField(auto_now_add=True)
+    feedback_content=models.CharField(max_length=100)
+    user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
 
 
     

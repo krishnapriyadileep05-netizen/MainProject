@@ -96,27 +96,47 @@ def ViewDonationRequest(request):
     if "uid" not in request.session:
         return redirect("Guest:Login")
     else:
-        requestdata=tbl_donationrequest.objects.all()
+        requestdata=tbl_donationrequest.objects.filter(donationrequest_status=0)
         return render(request,'User/ViewDonationRequest.html',{'requestdata':requestdata})
 
-def ViewItem(request,id):
-    itemdata=tbl_donationitems.objects.all()
-    return render(request,'User/ViewItem.html',{'itemdata':itemdata})
+def ViewItem(request, id):
+    itemdata = tbl_donationitems.objects.filter(donationrequest_id=id)
+    return render(request,'User/ViewItem.html',{
+        'itemdata':itemdata
+    })
 
-def Donate(request,id):
-    item=tbl_donationitems.objects.get(id=id)
-    userdata=tbl_user.objects.get(id=request.session["uid"])
-    volunteerdata=tbl_volunteer.objects.get(id=request.session["vid"])
+
+def Donate(request, id):
+    if "uid" not in request.session:
+        return redirect("Guest:Login")
+
+    item = tbl_donationitems.objects.get(id=id)
+    userdata = tbl_user.objects.get(id=request.session["uid"])
+
     if request.method == "POST":
-        type=request.POST.get("txt_type")
-        remark=request.POST.get("txt_remark")
-        amount=request.POST.get("txt_amount")
+        dtype = request.POST.get("txt_type")
+        remark = request.POST.get("txt_remark")
+        amount = request.POST.get("txt_amount")
+        donated = int(amount)
 
-     
-        tbl_donation.objects.create(donation_type=type,donation_remark=remark,
-                                    donation_amount=amount,user_id=userdata,
-                                    volunteer_id=volunteerdata,donationitem_id=item)
-        return render(request,'User/Donate.html',{'msg':"Donation Success"})
-    else:
-        return render(request,'User/Donate.html',{'userdata':userdata,'volunteerdata':volunteerdata})
+        tbl_donation.objects.create(
+            donation_type=dtype,
+            donation_remark=remark,
+            donation_amount=donated,
+            user_id=userdata,
+            donationitem_id=item,
+
+        )
+
+
+        return render(request,'User/Donate.html',{
+            'msg':"Donation Success"
+        })
+
+    return render(request,'User/Donate.html',{
+        'item':item
+    })
+
+def Feedback(request):
+    return render(request,'User/Feedback.html')
     

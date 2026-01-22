@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViewDonation</title>
 </head>
+
 <body>
     <form action="" method="post">
         {% csrf_token %}
@@ -18,7 +20,7 @@
                 <td>Date</td>
                 <td>Action</td>
             </tr>
-            {%  for i in viewdonationdata %}
+            {% for i in viewdonationdata %}
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{% if i.user_id %}
@@ -30,10 +32,17 @@
                 <td>{{ i.donation_remark }}</td>
                 <td>{{ i.donation_amount }}</td>
                 <td>{{ i.donation_date }}</td>
-                <td></td>
+                <td>
+                    <a href="{% url 'Admin:SendForCollection' i.id %}">
+                        Send for Collection
+                    </a>
+                </td>
+
+
             </tr>
             {% endfor %}
         </table>
     </form>
 </body>
+
 </html>

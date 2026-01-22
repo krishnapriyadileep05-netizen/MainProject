@@ -147,5 +147,43 @@ def Completed(request,id):
     cdata.save()
     return redirect('Volunteer:ViewMyTask')
 
-    
-    
+def VolunteerCollectionRequest(request):
+    if "vid" not in request.session:
+        return redirect("Guest:Login")
+
+    volunteer = tbl_volunteer.objects.get(id=request.session["vid"])
+
+    requests = tbl_collectionrequest.objects.filter(donation_id__user_id__place__district=volunteer.place.district,status=0)
+
+    return render(request,"Volunteer/ViewCollectionRequest.html",{'requests':requests})
+
+
+def MyCollectionRequest(request):
+    if "vid" not in request.session:
+        return redirect("Guest:Login")
+    volunteer = tbl_volunteer.objects.get(id=request.session["vid"])
+    requests = tbl_collectionrequest.objects.filter(volunteer_id=volunteer)
+    return render(request,"Volunteer/MyCollectionRequest.html",{'requests':requests})
+
+
+def TakeRequest(request, id):
+  
+    req = tbl_collectionrequest.objects.get(id=id)
+
+    if req.status == 0:
+        req.volunteer_id = tbl_volunteer.objects.get(id=request.session["vid"])
+        req.status = 1
+        req.save()
+
+    return redirect("Volunteer:VolunteerCollectionRequest")
+
+
+def updatestatus(request,id,status):
+  
+    req = tbl_collectionrequest.objects.get(id=id)
+    req.status = status
+    req.save()
+    return redirect("Volunteer:MyCollectionRequest")
+
+
+

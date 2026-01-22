@@ -19,5 +19,9 @@ urlpatterns = [path("HomePage/",views.HomePage,name="HomePage"),
                path("Accepted/<int:id>",views.Accepted,name="Accepted"),
                path("InProgress/<int:id>",views.InProgress,name="InProgress"),
                path("Completed/<int:id>",views.Completed,name="Completed"),
+               path("TakeRequest/<int:id>",views.TakeRequest,name="TakeRequest"),
+               path("VolunteerCollectionRequest/",views.VolunteerCollectionRequest,name="VolunteerCollectionRequest"),
+               path("MyCollectionRequest/",views.MyCollectionRequest,name="MyCollectionRequest"),
+               path("updatestatus/<int:id>/<int:status>",views.updatestatus,name="updatestatus"),
 
                ]

@@ -47,7 +47,8 @@
 {% if msg %}
 <script>
     alert("{{msg}}")
-    window.location="{% url 'Admin:AddItem' id %}";
+   window.location="{% url 'Admin:AddItem' id %}"
+
 </script>
 {% endif %}
 </html>

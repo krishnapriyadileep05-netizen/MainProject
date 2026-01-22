@@ -61,7 +61,10 @@
                 <td>{{ i.donationrequest_details }}</td>
                 <td>{{ i.donationrequest_date }}</td>
                 <td><a href="{% url 'Admin:delrequest' i.id %}">Delete  /
-                    <a href="{% url 'Admin:AddItem'  i.id %}"> Add Items</a>
+                    <a href="{% url 'Admin:AddItem'  i.id %}"> Add Items
+                      <br>  <a href="{% url 'Admin:Closed'  i.id %}"> Closed
+                    </a>
+
                 </a>
                 </td>
             </tr>

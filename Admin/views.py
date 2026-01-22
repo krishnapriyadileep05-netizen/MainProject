@@ -252,48 +252,78 @@ def End(request,id):
 def AssignVolunteer(request,id):
     volunteer = tbl_volunteer.objects.filter(volunteer_status = 1)
     return render(request,"Admin/AssignVolunteer.html",{'volunteerdata':volunteer})
-
 def DonationRequest(request):
     if "aid" not in request.session:
         return redirect("Guest:Login")
-    else:
-        requestdata=tbl_donationrequest.objects.all()
-        district=tbl_district.objects.all()
-        place=tbl_place.objects.all()
-        if request.method == "POST":
-            details=request.POST.get("txt_details")
-            place=tbl_place.objects.get(id=request.POST.get('sel_place'))
 
-            tbl_donationrequest.objects.create(donationrequest_details=details,place_id=place)
-            return redirect('Admin:DonationRequest')
-        else:
-            return render(request,"Admin/DonationRequest.html",{'district':district,'place':place,'requestdata':requestdata})
-        
-def delrequest(request,id):
-    tbl_donationrequest.objects.get(id=id).delete()
+    requestdata = tbl_donationrequest.objects.all()
+    district = tbl_district.objects.all()
+
+    if request.method == "POST":
+        details = request.POST.get("txt_details")
+        place = tbl_place.objects.get(id=request.POST.get("sel_place"))
+        user = tbl_user.objects.get(id=request.session["aid"])
+
+        tbl_donationrequest.objects.create(
+            donationrequest_details=details,
+            place_id=place,
+            user_id=user
+        )
+        return redirect('Admin:DonationRequest')
+
+    return render(request,"Admin/DonationRequest.html",{
+        'district':district,
+        'requestdata':requestdata
+    })
+
+
+def AddItem(request, id):
+    requestDat = tbl_donationrequest.objects.get(id=id)
+    itemdata = tbl_donationitems.objects.filter(donationrequest_id=requestDat)
+
+    if request.method == "POST":
+        name = request.POST.get("txt_name")
+        count = request.POST.get("txt_count")
+
+        tbl_donationitems.objects.create(
+            donationitems_name=name,
+            donationitems_count=count,
+            donationrequest_id=requestDat
+        )
+        return redirect('Admin:AddItem', id=id)
+
+    return render(request,"Admin/AddItem.html",{
+        'itemdata':itemdata,
+        'id':id
+    })
+
+def Closed(request,id):
+    cdata=tbl_donationrequest.objects.get(id=id)
+    cdata.donationrequest_status=1
+    cdata.save()
     return redirect('Admin:DonationRequest')
 
-def AddItem(request,id):
-    requestDat=tbl_donationrequest.objects.get(id=id)
-    itemdata=tbl_donationitems.objects.all()
-    if request.method =="POST":
-        name=request.POST.get("txt_name")
-        count=request.POST.get("txt_count")
-        tbl_donationitems.objects.create(donationitems_name=name,donationitems_count=count,donationrequest_id=requestDat)
-        return render(request,'Admin/AddItem.html',{'msg':"Inserted",'id':id})
-    else:
-        return render(request,"Admin/AddItem.html",{'itemdata':itemdata})
-    
-def delitem(request,id):
-    tbl_donationitems.objects.get(id=id).delete()
+
+def delitem(request, id):
+    item = tbl_donationitems.objects.get(id=id)
+    rid = item.donationrequest_id.id
+    item.delete()
+    return redirect('Admin:AddItem', id=rid)
+
+
+def delrequest(request, id):
+    tbl_donationrequest.objects.get(id=id).delete()
     return redirect('Admin:DonationRequest')
 
 def ViewDonation(request):
     if "aid" not in request.session:
         return redirect("Guest:Login")
-    else:
-        viewdonationdata=tbl_donation.objects.all()   
-        return render(request,'Admin/ViewDonation.html',{'viewdonationdata':viewdonationdata})
+
+    viewdonationdata = tbl_donation.objects.all()
+    return render(request,'Admin/ViewDonation.html',{
+        'viewdonationdata':viewdonationdata
+    })
+
 
 def Assign(request,aid):
     district=tbl_district.objects.all()
@@ -322,3 +352,11 @@ def Reply(request,id):
     else:
         return render(request,'Admin/Reply.html',{'complaintdata':complaintdata,'userdata':userdata})
 
+def SendForCollection(request, id):
+    donation = tbl_donation.objects.get(id=id)
+    if not tbl_collectionrequest.objects.filter(donation_id=donation).exists():
+        tbl_collectionrequest.objects.create(
+            donation_id=donation
+        )
+
+    return redirect("Admin:ViewDonation")

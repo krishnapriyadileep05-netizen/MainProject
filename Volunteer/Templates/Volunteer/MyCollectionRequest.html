@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Nearby Collection Requests</h2>
+
+    <table border="1">
+        <tr>
+            <td>Donator</td>
+            <td>Item</td>
+            <td>Quantity</td>
+            <td>District</td>
+            <td>Delivery Place</td>
+            <td>Contact</td>
+            <td>Action</td>
+        </tr>
+
+        {% for r in requests %}
+        <tr>
+            <td>{{ r.donation_id.user_id.user_name }}</td>
+            <td>{{ r.donation_id.donationitem_id.donationitems_name }}</td>
+            <td>{{ r.donation_id.donation_amount }}</td>
+            <td>{{ r.donation_id.user_id.place.district.district_name }}</td>
+            <td>{{ r.donation_id.user_id.place.place_name }}</td>
+            <td>{{ r.donation_id.user_id.user_contact }}</td>
+            <td>
+                {% if r.status == 1 %}
+                <a href="{% url 'Volunteer:updatestatus' r.id 2 %}">
+                    Collected
+                </a>
+                {% elif r.status == 2 %}
+                <a href="{% url 'Volunteer:updatestatus' r.id 3 %}">
+                    Delivered
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

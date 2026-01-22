@@ -37,7 +37,7 @@ class tbl_donation(models.Model):
     donation_amount=models.CharField(max_length=100)
     donationitem_id=models.ForeignKey(tbl_donationitems,on_delete=models.CASCADE,null=True)
     user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE,null=True)
-    volunteer_id=models.ForeignKey(tbl_volunteer,on_delete=models.CASCADE,default=0,null=True)
+    volunteer_id=models.ForeignKey(tbl_volunteer,on_delete=models.CASCADE,null=True)
 
 class tbl_assigndonation(models.Model):
     assigndonation_date=models.DateField(auto_now_add=True)
@@ -45,3 +45,13 @@ class tbl_assigndonation(models.Model):
     assigndonation_description=models.CharField(max_length=100)
     volunteer_id=models.ForeignKey(tbl_volunteer,on_delete=models.CASCADE)
     place_id=models.ForeignKey(tbl_place,on_delete=models.CASCADE)
+
+
+class tbl_collectionrequest(models.Model):
+    request_date = models.DateField(auto_now_add=True)
+    status = models.IntegerField(default=0)
+
+    donation_id = models.ForeignKey(tbl_donation, on_delete=models.CASCADE)
+    delivery_place = models.ForeignKey(tbl_place, on_delete=models.CASCADE,null=True)
+    volunteer_id = models.ForeignKey(tbl_volunteer, on_delete=models.CASCADE, null=True)
+
