@@ -119,32 +119,58 @@ def Donate(request, id):
         amount = request.POST.get("txt_amount")
         donated = int(amount)
 
-        tbl_donation.objects.create(
-            donation_type=dtype,
-            donation_remark=remark,
-            donation_amount=donated,
-            user_id=userdata,
-            donationitem_id=item,
+        if dtype == "Money":
+            request.session["donation_data"] = {
+                "donation_type": dtype,
+                "donation_remark": remark,
+                "donation_amount": donated,
+                "user_id": userdata.id,
+                "donationitem_id": item.id
+            }
+            return redirect("User:Payment")
 
-        )
-
-
-        return render(request,'User/Donate.html',{
-            'msg':"Donation Success"
-        })
+        else:
+            tbl_donation.objects.create(
+                donation_type=dtype,
+                donation_remark=remark,
+                donation_amount=donated,
+                user_id=userdata,
+                donationitem_id=item,
+            )
+            return render(request,'User/Donate.html',{
+                'msg': "Donation Success"
+            })
 
     return render(request,'User/Donate.html',{
-        'item':item
+        'item': item
     })
+
+def PaymentPage(request):
+    donation_data = request.session.get("donation_data")
+    if not donation_data:
+        return redirect("User:HomePage") 
+
+    if request.method == "POST":
+        tbl_donation.objects.create(
+            donation_amount=donation_data["donation_amount"],
+            user_id=tbl_user.objects.get(id=donation_data["user_id"]),
+            donationitem_id=tbl_donationitems.objects.get(id=donation_data["donationitem_id"]),
+        )
+        del request.session["donation_data"]
+
+        return  redirect("User:HomePage")
+
+    return render(request, "User/Payment.html", {"donation": donation_data})
+
 
 def DonationPayment(request):
     userdata=tbl_user.objects.get(id=request.session["uid"])
     if request.method =="POST":
         amount=request.POST.get("txt_amount")
-        tbl_payment.objects.create(payment_amount=amount,user_id=userdata)
-        return render(request,'User/DonationPayment.html',{'msg':"Donation Success"})
+        payment=tbl_payment.objects.create(payment_amount=amount,user_id=userdata)
+        return render(request,'User/Payment_suc.html',{'msg':"Donation Success",'payment':payment})
     else:
-        return render(request,"User/DonationPayment.html",{"userdata":userdata})
+        return render(request,"User/Payment.html",{"userdata":userdata})
     
 
 def ViewCamp(request):
@@ -153,5 +179,13 @@ def ViewCamp(request):
     
 
 def Feedback(request):
-    return render(request,'User/Feedback.html')
+    userdata=tbl_user.objects.get(id=request.session["uid"])
+    if request.method == "POST":
+        content=request.POST.get("txt_content")
+        tbl_feedback.objects.create(feedback_content=content,user_id=userdata)
+        return render(request,'User/Feedback.html',{'msg':"Feedback Sended"})
+    else:
+        return render(request,'User/Feedback.html',{"userdata":userdata})
+
+
     
