@@ -20,7 +20,7 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ i.donationitems_name }}</td>
                 <td>{{ i.donationitems_count }}</td>
-                <td><a href="{% url 'Volunteer:Donation' i.id %}">Donate</a></td>
+                <td><a href="{% url 'Volunteer:Donate' i.id %}">Donate</a></td>
             </tr>
             {% endfor %}
         </table>

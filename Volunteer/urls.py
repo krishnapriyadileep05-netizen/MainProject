@@ -12,7 +12,11 @@ urlpatterns = [path("HomePage/",views.HomePage,name="HomePage"),
                path("Join/<int:id>",views.join,name="Join"),
                path("ViewDonationRequest/",views.ViewDonationRequest,name="ViewDonationRequest"),
                path("ViewItem/<int:id>",views.ViewItem,name="ViewItem"),
-               path("Donation/<int:id>",views.Donation,name="Donation"),
+               path("Donate/<int:id>",views.Donate,name="Donate"),
+               path("PaymentPage/",views.PaymentPage,name="Payment"),
+               path("DonationPayment/",views.DonationPayment,name="DonationPayment"),
+
+
                path("logout/",views.logout,name="logout"),
                path("Complaint/",views.Complaint,name="Complaint"),
                path("ViewMyTask/",views.ViewMyTask,name="ViewMyTask"),

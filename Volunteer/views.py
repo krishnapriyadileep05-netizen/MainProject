@@ -96,20 +96,71 @@ def ViewDonationRequest(request):
 def ViewItem(request,id):
     itemdata=tbl_donationitems.objects.all()
     return render(request,'Volunteer/ViewItem.html',{'itemdata':itemdata})
-    
-def Donation(request,id):
-    volunteerid=tbl_volunteer.objects.get(id=request.session["vid"])
-    itemid=tbl_donationitems.objects.get(id=id)
-    if request.method == "POST":
-        type=request.POST.get("txt_type")
-        remark=request.POST.get("txt_remark")
-        amount=request.POST.get("txt_amount")
-        
-        tbl_donation.objects.create(donation_type=type,donation_remark=remark,donation_amount=amount,volunteer_id=volunteerid,donationitem_id=itemid)
 
-        return render(request,'Volunteer/Donation.html',{'msg':'Donated'})
+def Donate(request, id):
+    if "vid" not in request.session:
+        return redirect("Guest:Login")
+
+    item = tbl_donationitems.objects.get(id=id)
+    vdata = tbl_volunteer.objects.get(id=request.session["vid"])
+
+    if request.method == "POST":
+        dtype = request.POST.get("txt_type")
+        remark = request.POST.get("txt_remark")
+        amount = request.POST.get("txt_amount")
+        donated = int(amount)
+
+        if dtype == "Money":
+            request.session["donation_data"] = {
+                "donation_type": dtype,
+                "donation_remark": remark,
+                "donation_amount": donated,
+                "volunteer_id": vdata.id,
+                "donationitem_id": item.id
+            }
+            return redirect("Volunteer:Payment")
+
+        else:
+            tbl_donation.objects.create(
+                donation_type=dtype,
+                donation_remark=remark,
+                donation_amount=donated,
+                volunteer_id=vdata,
+                donationitem_id=item,
+            )
+            return render(request,'Volunteer/Donation.html',{
+                'msg': "Donation Success"
+            })
+
+    return render(request,'Volunteer/Donation.html',{
+        'item': item
+    })
+
+def PaymentPage(request):
+    donation_data = request.session.get("donation_data")
+    if not donation_data:
+        return redirect("Volunteer:HomePage") 
+
+    if request.method == "POST":
+        tbl_donation.objects.create(
+            donation_amount=donation_data["donation_amount"],
+            volunteer_id=tbl_volunteer.objects.get(id=donation_data["volunteer_id"]),
+            donationitem_id=tbl_donationitems.objects.get(id=donation_data["donationitem_id"]),
+        )
+        del request.session["donation_data"]
+
+        return  redirect("Volunteer:DonationPayment")
+
+    return render(request, "Volunteer/Payment.html", {"donation": donation_data})
+
+def DonationPayment(request):
+    vdata=tbl_volunteer.objects.get(id=request.session["vid"])
+    if request.method =="POST":
+        amount=request.POST.get("txt_amount")
+        payment=tbl_payment.objects.create(payment_amount=amount,volunteer_id=vdata)
+        return render(request,'Volunteer/Payment_suc.html',{'msg':"Donation Success",'payment':payment})
     else:
-        return render(request,'Volunteer/Donation.html',{'volunteerid':volunteerid})
+        return render(request,"Volunteer/Payment.html",{"vdata":vdata})
     
 def Complaint(request):
     if "vid" in request.session:
