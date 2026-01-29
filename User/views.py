@@ -137,6 +137,21 @@ def Donate(request, id):
         'item':item
     })
 
+def DonationPayment(request):
+    userdata=tbl_user.objects.get(id=request.session["uid"])
+    if request.method =="POST":
+        amount=request.POST.get("txt_amount")
+        tbl_payment.objects.create(payment_amount=amount,user_id=userdata)
+        return render(request,'User/DonationPayment.html',{'msg':"Donation Success"})
+    else:
+        return render(request,"User/DonationPayment.html",{"userdata":userdata})
+    
+
+def ViewCamp(request):
+    campdata=tbl_camp.objects.all()
+    return render(request,"User/ViewCamp.html",{'campdata':campdata})
+    
+
 def Feedback(request):
     return render(request,'User/Feedback.html')
     

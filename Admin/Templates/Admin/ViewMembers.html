@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewMembers</title>
+</head>
+<body>
+    <form action="" method="post">
+      <h2 style="text-align: center;">Volunteer List</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>Name</td>
+                <td>Photo</td>
+                <td>DOB</td>
+                <td>Gender</td>
+                <td>Contact</td>
+                
+            </tr>
+            {% for i in memberdata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.team_name }}</td>
+                <td>{{ i.team_photo }}</td>
+                <td>{{ i.team_dob }}</td>
+                <td>{{ i.team_gender }}</td>
+                <td>{{ i.team_contact }}</td>
+               
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

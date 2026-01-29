@@ -15,6 +15,9 @@ urlpatterns = [
     path("Donate/<int:id>",views.Donate,name="Donate"),
     path("logout/",views.logout,name="logout"),
     path("Feedback/",views.Feedback,name="Feedback"),
+    path("DonationPayment/",views.DonationPayment,name="DonationPayment"),
+    path("ViewCamp/",views.ViewCamp,name="ViewCamp"),
+
 
 
 

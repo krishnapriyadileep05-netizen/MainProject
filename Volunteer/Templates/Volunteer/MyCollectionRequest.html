@@ -38,6 +38,8 @@
                 <a href="{% url 'Volunteer:updatestatus' r.id 3 %}">
                     Delivered
                 </a>
+                {% elif r.status == 3 %}
+                <span>Completed</span>
                 {% endif %}
             </td>
         </tr>

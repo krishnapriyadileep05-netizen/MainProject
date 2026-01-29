@@ -50,12 +50,16 @@ path("AddItem/<int:id>",views.AddItem,name="AddItem"),
 path("delitem/<int:id>",views.delitem,name="delitem"),
 path("Closed/<int:id>",views.Closed,name="Closed"),
 
-path("ViewDonation/",views.ViewDonation,name="ViewDonation"),
 path("Assign/<int:aid>/",views.Assign,name="Assign"),
 path("logout/",views.logout,name="logout"),
 path("ViewComplaint/",views.ViewComplaint,name="ViewComplaint"),
 path("Reply/<int:id>",views.Reply,name="Reply"),
-path("SendForCollection/<int:id>",views.SendForCollection,name="SendForCollection"),
+path("ViewUserDonation/",views.ViewUserDonation,name="ViewUserDonation"),
 
 
+path('view-donation/', views.ViewDonation, name='ViewDonation'),
+path('send-selected-collection/', views.SendSelectedCollection, name='SendSelectedCollection'),
+path('send-all-collection/', views.SendAllCollection, name='SendAllCollection'),
+
+path('ViewMembers/<int:id>', views.ViewMembers, name='ViewMembers'),
 ]

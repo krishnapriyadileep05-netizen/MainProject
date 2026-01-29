@@ -19,6 +19,7 @@
             <td>VOLUNTEER CONTACT</td>
             <td>DATE</td>
             <td>STATUS</td>
+            <td>Action</td>
         </tr>
         {% for i in responsedata %}
         <tr>
@@ -37,8 +38,9 @@
                 N/A
                 {% endif %}
             </td>
+            <td><a href="{% url 'Admin:ViewMembers' i.id %}">View Members</a></td>
             
-        </tr>
+        </tr> 
         
         {% endfor %}
 

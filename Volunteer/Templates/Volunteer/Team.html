@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 style="text-align: center;">Volunteer Details</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id="txt_name"></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="file_photo" id="file_photo"></td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td><input type="date" name="txt_date" id="txt_date"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="txt_gender" value="Male">Male
+                    <input type="radio" name="txt_gender"  value="Female">Female
+                </td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_contact" id="txt_contact"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit"></td>
+                
+            </tr>
+        </table>
+<h2 style="text-align: center;">Volunteer List</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>SI.NO</td>
+                <td>Name</td>
+                <td>Photo</td>
+                <td>DOB</td>
+                <td>Gender</td>
+                <td>Contact</td>
+                <td>Action</td>
+            </tr>
+            {% for i in teamdata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.team_name }}</td>
+                <td>{{ i.team_photo }}</td>
+                <td>{{ i.team_dob }}</td>
+                <td>{{ i.team_gender }}</td>
+                <td>{{ i.team_contact }}</td>
+                <td><a href="{% url 'Volunteer:delteam' i.id %}"> Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </form>
+</body>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Volunteer:Team' %}";
+</script>
+{% endif %}
+</html>

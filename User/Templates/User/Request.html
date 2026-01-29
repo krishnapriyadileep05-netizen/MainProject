@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request</title>
 </head>
+
 <body>
     <form action="" method="post">
-         {% csrf_token %}
-          <h2 style="text-align: center;">Request</h2>
+        {% csrf_token %}
+        <h2 style="text-align: center;">Request</h2>
         <table border="1" align="center">
             <tr>
                 <td>Title</td>
@@ -45,11 +47,11 @@
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" value="Submit"></td>
-               
+
             </tr>
-             
+
         </table>
-         <h2 style="text-align: center;">Request  List</h2>
+        <h2 style="text-align: center;">Request List</h2>
         <table border="1" align="center">
             <tr>
                 <td>SI.NO</td>
@@ -68,7 +70,7 @@
                 <td>{{ i.request_content }}</td>
                 <td>{{i.place_id.district.district_name}}</td>
                 <td>{{ i.place_id.place_name }}</td>
-                 <td>{{i.request_todate}}</td>
+                <td>{{i.request_todate}}</td>
                 <td>{{i.request_date}}</td>
                 <td><a href="{% url 'Admin:ViewResponse' i.id %}">View Volunteer</a></td>
             </tr>
@@ -83,7 +85,7 @@
 <script>
 
     alert("{{msg}}")
-    window.location="{% url 'User:Request' %}";
+    window.location = "{% url 'User:Request' %}";
 </script>
 {% endif %}
 
@@ -100,7 +102,7 @@
                 $("#sel_place").html(data);
             },
         });
-    });
+    });
 </script>
 
 

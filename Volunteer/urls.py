@@ -23,5 +23,6 @@ urlpatterns = [path("HomePage/",views.HomePage,name="HomePage"),
                path("VolunteerCollectionRequest/",views.VolunteerCollectionRequest,name="VolunteerCollectionRequest"),
                path("MyCollectionRequest/",views.MyCollectionRequest,name="MyCollectionRequest"),
                path("updatestatus/<int:id>/<int:status>",views.updatestatus,name="updatestatus"),
-
+               path("Team/",views.Team,name="Team"),
+               path("delteam/<int:id>",views.delteam,name="delteam"),
                ]

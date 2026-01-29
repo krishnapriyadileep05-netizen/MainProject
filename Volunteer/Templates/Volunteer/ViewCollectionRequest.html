@@ -30,9 +30,13 @@
             <td>{{ r.donation_id.user_id.place.place_name }}</td>
             <td>{{ r.donation_id.user_id.user_contact }}</td>
             <td>
+                {% if r.status == 0 %}
                 <a href="{% url 'Volunteer:TakeRequest' r.id %}">
                     Take Request
                 </a>
+                {% elif r.status == 1 %}
+                <span>Request Accepted</span>
+                {% endif %}
                 
             </td>
         </tr>

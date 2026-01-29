@@ -153,7 +153,7 @@ def VolunteerCollectionRequest(request):
 
     volunteer = tbl_volunteer.objects.get(id=request.session["vid"])
 
-    requests = tbl_collectionrequest.objects.filter(donation_id__user_id__place__district=volunteer.place.district,status=0)
+    requests = tbl_collectionrequest.objects.filter(donation_id__user_id__place__district=volunteer.place.district)
 
     return render(request,"Volunteer/ViewCollectionRequest.html",{'requests':requests})
 
@@ -186,4 +186,22 @@ def updatestatus(request,id,status):
     return redirect("Volunteer:MyCollectionRequest")
 
 
-
+def Team(request):
+    teamdata=tbl_team.objects.all()
+    volunteerdata=tbl_volunteer.objects.get(id=request.session["vid"])
+    if request.method == "POST":
+     name=request.POST.get("txt_name")
+     photo=request.FILES.get("file_photo")
+     gender=request.POST.get("txt_gender")
+     dob=request.POST.get("txt_date")
+     contact=request.POST.get("txt_contact")
+     
+     tbl_team.objects.create(team_name=name,team_photo=photo,team_gender=gender,team_dob=dob,team_contact=contact,volunteer_id=volunteerdata)
+     return render(request,"Volunteer/Team.html",{'msg':'Inserted'})
+    else:
+        return render(request,"Volunteer/Team.html",{'teamdata':teamdata})
+    
+def delteam(request,id):
+    team=tbl_team.objects.get(id=id).delete()
+    return redirect("Volunteer:Team")
+        

@@ -25,5 +25,10 @@ class tbl_feedback(models.Model):
     feedback_content=models.CharField(max_length=100)
     user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
 
+class tbl_payment(models.Model):
+    payment_amount=models.CharField(max_length=50)
+    payment_date=models.DateField(auto_now_add=True)
+    user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
+
 
     

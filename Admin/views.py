@@ -320,9 +320,10 @@ def ViewDonation(request):
         return redirect("Guest:Login")
 
     viewdonationdata = tbl_donation.objects.all()
-    return render(request,'Admin/ViewDonation.html',{
-        'viewdonationdata':viewdonationdata
+    return render(request, 'Admin/ViewDonation.html', {
+        'viewdonationdata': viewdonationdata
     })
+
 
 
 def Assign(request,aid):
@@ -351,12 +352,50 @@ def Reply(request,id):
         return render(request,'Admin/Reply.html',{'msg':'Replied'})
     else:
         return render(request,'Admin/Reply.html',{'complaintdata':complaintdata,'userdata':userdata})
+    
+def SendSelectedCollection(request):
+    if request.method == "POST":
+        ids = request.POST.getlist("donation_ids")
 
-def SendForCollection(request, id):
-    donation = tbl_donation.objects.get(id=id)
-    if not tbl_collectionrequest.objects.filter(donation_id=donation).exists():
-        tbl_collectionrequest.objects.create(
-            donation_id=donation
-        )
+        count = 0
+        for did in ids:
+            donation = tbl_donation.objects.get(id=did)
+            if not tbl_collectionrequest.objects.filter(donation_id=donation).exists():
+                tbl_collectionrequest.objects.create(donation_id=donation)
+                count += 1
 
-    return redirect("Admin:ViewDonation")
+        viewdonationdata = tbl_donation.objects.all()
+        return render(request, "Admin/ViewDonation.html", {
+            "viewdonationdata": viewdonationdata,
+            "msg": f"{count} Collection Requests Sent"
+        })
+
+    
+
+def SendAllCollection(request):
+    donations = tbl_donation.objects.all()
+    count = 0
+
+    for donation in donations:
+        if not tbl_collectionrequest.objects.filter(donation_id=donation).exists():
+            tbl_collectionrequest.objects.create(donation_id=donation)
+            count += 1
+
+    viewdonationdata = tbl_donation.objects.all()
+    return render(request, "Admin/ViewDonation.html", {
+        "viewdonationdata": viewdonationdata,
+        "msg": f"{count} Collection Requests Sent"
+    })
+
+
+
+def ViewUserDonation(request):
+    paymentdata=tbl_payment.objects.all()
+    return render(request,"Admin/ViewUserDonation.html",{"paymentdata":paymentdata})
+
+def ViewMembers(request,id):
+    
+    memberdata=tbl_team.objects.filter(volunteer_id=id)
+    return render(request,"Admin/ViewMembers.html",{'memberdata':memberdata})
+
+

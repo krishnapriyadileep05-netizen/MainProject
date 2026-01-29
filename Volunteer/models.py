@@ -55,3 +55,10 @@ class tbl_collectionrequest(models.Model):
     delivery_place = models.ForeignKey(tbl_place, on_delete=models.CASCADE,null=True)
     volunteer_id = models.ForeignKey(tbl_volunteer, on_delete=models.CASCADE, null=True)
 
+class tbl_team(models.Model):
+    team_name=models.CharField(max_length=100)
+    team_photo=models.FileField(upload_to="Assets/VolunteerDocs/")
+    team_gender=models.CharField(max_length=100)
+    team_dob=models.DateField()
+    team_contact=models.CharField(max_length=100)
+    volunteer_id=models.ForeignKey(tbl_volunteer,on_delete=models.CASCADE)

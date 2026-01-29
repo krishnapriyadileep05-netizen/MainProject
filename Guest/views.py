@@ -3,7 +3,7 @@ from Admin.models import *
 from Guest.models import *
 # Create your views here.
 def indexpage(request):
-    return render(request,'Guest/Index.html')
+    return render(request,'Guest/Indexpage.html')
 
 def UserRegistration(request):
     district=tbl_district.objects.all()
