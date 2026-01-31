@@ -3,36 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewMyTask</title>
+    <title>View My Task</title>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table border="1" align="center">
-            <tr>
-                <td>SI.NO</td>
-                <td>Request Title</td>
-                <td>Description</td>
-                <td>Date</td>
-                <td>To Date</td>
-                <td>Place</td>
-                <td>Action</td>
-            </tr>
-            {% for i in responsedata %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ i.request_id.request_title }}</td>
-                <td>{{ i.request_id.request_content }}</td>
-                <td>{{ i.request_id.request_date }}</td>
-                <td>{{ i.request_id.request_todate }}</td>
-                <td>{{ i.request_id.place_id.place_name }}</td>
-                <td><a href="{% url 'Volunteer:Accepted' i.id %}">Accepted</a>
-                  <br>  <a href="{% url 'Volunteer:InProgress' i.id %}">InProgress</a>
-                  <br>  <a href="{% url 'Volunteer:Completed' i.id %}">Completed</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </form>
+
+<h2 align="center">My Tasks</h2>
+
+<table border="1" align="center">
+    <tr>
+        <th>SI.NO</th>
+        <th>Request Title</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>To Date</th>
+        <th>Place</th>
+        <th>Status / Action</th>
+        <th>Assign</th>
+    </tr>
+
+    {% for i in responsedata %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.request_id.request_title }}</td>
+        <td>{{ i.request_id.request_content }}</td>
+        <td>{{ i.request_id.request_date }}</td>
+        <td>{{ i.request_id.request_todate }}</td>
+        <td>{{ i.request_id.place_id.place_name }}</td>
+
+        <td>
+            {% if i.response_status == 0 %}
+                Accepted <br>
+                <a href="{% url 'Volunteer:InProgress' i.id %}">Start Work</a>
+
+            {% elif i.response_status == 2 %}
+                In Progress <br>
+                <a href="{% url 'Volunteer:Completed' i.id %}">Mark Completed</a>
+
+            {% elif i.response_status == 3 %}
+                Completed
+
+            {% else %}
+                Pending
+            {% endif %}
+        </td>
+        <td>
+    {% if i.response_status != 3 %}
+        <a href="{% url 'Volunteer:AssignMembers' i.id %}">
+            Assign Members
+        </a>
+    {% else %}
+        Completed
+    {% endif %}
+</td>
+
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="7" align="center">No Tasks Found</td>
+    </tr>
+    {% endfor %}
+</table>
+
 </body>
 </html>

@@ -4,27 +4,57 @@ from Guest.models import *
 # Create your views here.
 def indexpage(request):
     return render(request,'Guest/Indexpage.html')
-
 def UserRegistration(request):
-    district=tbl_district.objects.all()
-    place=tbl_place.objects.all()
+    district = tbl_district.objects.all()
+    place = tbl_place.objects.all()
+
     if request.method == "POST":
-        name=request.POST.get("txt_name")
-        email=request.POST.get("txt_email")
-        contact=request.POST.get("txt_contact")
-        address=request.POST.get("txt_address")
-        password=request.POST.get("txt_password")
-        photo=request.FILES.get("file_photo")
-        place=tbl_place.objects.get(id=request.POST.get("sel_place"))
+        name = request.POST.get("txt_name")
+        email = request.POST.get("txt_email")
+        contact = request.POST.get("txt_contact")
+        address = request.POST.get("txt_address")
+        password = request.POST.get("txt_password")
+        confirm = request.POST.get("txt_password")  
+
+        photo = request.FILES.get("file_photo")
+        place = tbl_place.objects.get(id=request.POST.get("sel_place"))
+
+        if password != confirm:  
+            return render(
+                request,
+                'Guest/UserRegistration.html',
+                {
+                    'msg': "Password and Confirm Password do not match",
+                    'district': district,
+                    'place': place
+                }
+            )
+
         checkuseremail = tbl_user.objects.filter(user_email=email).count()
         if checkuseremail > 0:
-            return render(request,'Guest/UserRegistration.html',{'msg':"Email Already Exist"})
+            return render(
+                request,
+                'Guest/UserRegistration.html',
+                {
+                    'msg': "Email Already Exist",
+                    'district': district,
+                    'place': place
+                }
+            )
         else:
-            tbl_user.objects.create(user_name=name,user_email=email,user_contact=contact,user_address=address,
-            user_password=password,user_photo=photo,place=place)
-            return render(request,'Guest/UserRegistration.html',{'msg':'Registered'})
+            tbl_user.objects.create(
+                user_name=name,
+                user_email=email,
+                user_contact=contact,
+                user_address=address,
+                user_password=password,
+                user_photo=photo,
+                place=place
+            )
+            return render(request, 'Guest/UserRegistration.html', {'msg': 'Registered'})
+
     else:
-        return render(request,'Guest/UserRegistration.html',{'district':district,'place':place})
+        return render(request, 'Guest/UserRegistration.html', {'district': district, 'place': place})
 
 def AjaxPlace(request):
     district=tbl_district.objects.get(id=request.GET.get("did"))
@@ -58,27 +88,40 @@ def Login(request):
     else:
         return render(request,'Guest/Login.html')
             
-
 def Volunteer(request):
-    district=tbl_district.objects.all()
-    place=tbl_place.objects.all()
+    district = tbl_district.objects.all()
+    place = tbl_place.objects.all()
+
     if request.method == "POST":
-        name=request.POST.get("txt_name")
-        email=request.POST.get("txt_email")
-        password=request.POST.get("txt_password")
-        photo=request.FILES.get("file_photo")
-        proof=request.FILES.get("file_proof")
-        address=request.POST.get("txt_address")
-        contact=request.POST.get("txt_contact")
+        name = request.POST.get("txt_name")
+        email = request.POST.get("txt_email")
+        password = request.POST.get("txt_password")
+        confirm = request.POST.get("txt_confirm")  # fixed typo: POst -> POST
+        photo = request.FILES.get("file_photo")
+        proof = request.FILES.get("file_proof")
+        address = request.POST.get("txt_address")
+        contact = request.POST.get("txt_contact")
         emergency = 1 if request.POST.get("txt_emergency") == "1" else 0
 
-        place=tbl_place.objects.get(id=request.POST.get("sel_place"))
+        place_obj = tbl_place.objects.get(id=request.POST.get("sel_place"))
         checkemail = tbl_volunteer.objects.filter(volunteer_email=email).count()
+
         if checkemail > 0:
-            return render(request,"Guest/Volunteer.html",{'msg':"Email Already Exist"})
+            return render(request, "Guest/Volunteer.html", {'msg': "Email Already Exist"})
+        elif password != confirm:
+            return render(request, "Guest/Volunteer.html", {'msg': "Password and Confirm Password do not match"})
         else:
-            tbl_volunteer.objects.create(volunteer_name=name,volunteer_email=email,volunteer_password=password,volunteer_photo=photo,
-            volunteer_proof=proof,volunteer_address=address,volunteer_contact=contact,place=place,volunteer_emergency=emergency)
-            return render(request,'Guest/Volunteer.html',{'msg':'data inserted'})
+            tbl_volunteer.objects.create(
+                volunteer_name=name,
+                volunteer_email=email,
+                volunteer_password=password,
+                volunteer_photo=photo,
+                volunteer_proof=proof,
+                volunteer_address=address,
+                volunteer_contact=contact,
+                place=place_obj,
+                volunteer_emergency=emergency
+            )
+            return render(request, 'Guest/Volunteer.html', {'msg': 'Data inserted successfully'})
     else:
-        return render(request,'Guest/Volunteer.html',{'districts':district,'place':place})
+        return render(request, 'Guest/Volunteer.html', {'districts': district, 'place': place})

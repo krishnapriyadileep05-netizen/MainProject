@@ -8,7 +8,7 @@
 <body>
     <form action="" method="post">
             {% csrf_token %}
-
+ <h2 style="text-align: center;">Admin Registration</h2>
         <table border="1" align="center">
             <tr>
                 <td>Name</td>
@@ -18,16 +18,35 @@
                 <td>Email</td>
                 <td><input type="email" required name="txt_email" id="txt_email" placeholder="Enter your Email"></td>
             </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" required name="txt_password" id="txt_password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required name="txt_pass" placeholder="Enter Password"></td>
-            </tr>
-            <tr>
+           <tr>
+    <td>Password</td>
+    <td>
+        <input type="password"
+               name="txt_password"
+               id="txt_password"
+               required
+               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+               title="Must contain at least one number, one uppercase, one lowercase letter, and at least 8 characters"
+               placeholder="Enter Password">
+    </td>
+</tr>
+
+<tr>
+    <td>Confirm Password</td>
+    <td>
+        <input type="password"
+               name="txt_confirm"
+               id="txt_confirm"
+               required
+               placeholder="Confirm Password">
+    </td>
+</tr>
                 <td colspan="2" align="center"><input type="submit" value="Submit"></td>
                 
             </tr>
         </table>
     </form>
+    <br>
     <table border="1" align="center">
         <tr>
             <td>SI.NO</td>

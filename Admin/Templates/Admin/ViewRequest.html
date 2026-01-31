@@ -3,96 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewReuest</title>
+    <title>View Requests</title>
+    <style>
+        .important { background-color: #ffeb99; font-weight: bold; }
+    </style>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-         <h2 style="text-align: center;">Request</h2>
-        <table border="1" align="center">
-            <tr>
-                <td>SI.NO</td>
-                <td>Title</td>
-                <td>Content</td>
-                <td>District</td>
-                <td>Place</td>
-                <td>Date</td>
-                <td>To Date</td>
-                <td>Action</td>
-            </tr>
-             {% for i in pending %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{i.request_title}}</td>
-                <td>{{i.request_content}}</td>
-                <td>{{i.place_id.district.district_name}}</td>
-                <td>{{ i.place_id.place_name }}</td>
-                <td>{{i.request_date}}</td>
-                <td>{{i.request_todate}}</td>
-                <td><a href="{% url 'Admin:acceptrequest' i.id %}">Accept Request/
-                    <a href="{% url 'Admin:rejectrequest' i.id %}">Reject Request
 
-                </a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        <h2 style="text-align: center;">Accepted List</h2>
-        <table border="1" align="center">
-            <tr>
-                <td>SI.NO</td>
-                <td>Title</td>
-                <td>Content</td>
-                <td>District</td>
-                <td>Place</td>
-                <td>Date</td>
-                <td>To Date</td>
-                <td>Action</td>
-            </tr>
-            {% for i in accept %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{i.request_title}}</td>
-                <td>{{i.request_content}}</td>
-                <td>{{i.place_id.district.district_name}}</td>
-                <td>{{i.place_id.place_name}}</td>
-                <td>{{i.request_date}}</td>
-                <td>{{i.request_todate}}</td>
+<h2 style="text-align: center;">Pending Requests</h2>
+<table border="1" align="center">
+    <tr>
+        <th>SI.NO</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>District</th>
+        <th>Place</th>
+        <th>Date</th>
+        <th>To Date</th>
+        <th>Action</th>
+    </tr>
 
-                <td><a href="{%url 'Admin:ViewResponse' i.id %}">View Respond  </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        <h2 style="text-align: center;">Rejected  List</h2>
+    {% for i in pending %}
+    <tr {% if i.is_important %}class="important"{% endif %}>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.request_title }}</td>
+        <td>{{ i.request_content }}</td>
+        <td>{{ i.place_id.district.district_name }}</td>
+        <td>{{ i.place_id.place_name }}</td>
+        <td>{{ i.request_date }}</td>
+        <td>{{ i.request_todate }}</td>
+        <td>
+            <a href="{% url 'Admin:acceptrequest' i.id %}">Accept</a> |
+            <a href="{% url 'Admin:rejectrequest' i.id %}">Reject</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="8" align="center">No Pending Requests</td>
+    </tr>
+    {% endfor %}
+</table>
 
-        <table border="1" align="center">
-            <tr>
-                <td>SI.NO</td>
-                <td>Title</td>
-                <td>Content</td>
-                <td>District</td>
-                <td>Place</td>
-                <td>Date</td>
-                <td>Action</td>
-            </tr>
-            {% for i in reject %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{i.request_title}}</td>
-                <td>{{i.request_content}}</td>
-                <td>{{i.place_id.district.district_name}}</td>
-                <td>{{i.place_id.place_name}}</td>
-                <td>{{i.request_date}}</td>
-                
-                <td>
-                   
-                    <a href="{% url 'Admin:rejectrequest' i.id %}" > Accept Request
-                    </a>
-                   
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </form>
+<br><br>
+
+<h2 style="text-align: center;">Accepted Requests</h2>
+<table border="1" align="center">
+    <tr>
+        <th>SI.NO</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>District</th>
+        <th>Place</th>
+        <th>Date</th>
+        <th>To Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in accept %}
+    <tr {% if i.is_important %}class="important"{% endif %}>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.request_title }}</td>
+        <td>{{ i.request_content }}</td>
+        <td>{{ i.place_id.district.district_name }}</td>
+        <td>{{ i.place_id.place_name }}</td>
+        <td>{{ i.request_date }}</td>
+        <td>{{ i.request_todate }}</td>
+        <td>
+            <a href="{% url 'Admin:ViewResponse' i.id %}">View Response</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="8" align="center">No Accepted Requests</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+
+<h2 style="text-align: center;">Rejected Requests</h2>
+<table border="1" align="center">
+    <tr>
+        <th>SI.NO</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>District</th>
+        <th>Place</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in reject %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.request_title }}</td>
+        <td>{{ i.request_content }}</td>
+        <td>{{ i.place_id.district.district_name }}</td>
+        <td>{{ i.place_id.place_name }}</td>
+        <td>{{ i.request_date }}</td>
+        <td>
+            <a href="{% url 'Admin:acceptrequest' i.id %}">Accept</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="7" align="center">No Rejected Requests</td>
+    </tr>
+    {% endfor %}
+</table>
+
 </body>
 </html>

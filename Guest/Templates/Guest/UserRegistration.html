@@ -6,7 +6,9 @@
     <title>UserRegistration</title>
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data"><table border="1" align="center">
+    <form action="" method="post" enctype="multipart/form-data">
+        <h2 style="text-align: center;">User Registration</h2>
+        <table border="1" align="center">
           {% csrf_token %}
         <tr>
             <td>Name</td> 
@@ -28,6 +30,10 @@
         <tr>
             <td>Password</td>
             <td><input type="password" placeholder="Enter your Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required name="txt_password" id="txt_password"></td>
+        </tr>
+        <tr>
+            <td>Confirm Password</td>
+            <td><input type="password" placeholder="Confirm Password" required name="txt_password" id="txt_password"></td>
         </tr>
         <tr>
             <td>Photo</td>

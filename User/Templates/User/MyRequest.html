@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Requests</title>
+</head>
+
+<body>
+
+    <h2 align="center">My Requests</h2>
+
+    <table border="1" align="center">
+        <tr>
+            <th>SI.NO</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Emergency</th>
+            <th>To Date</th>
+            <th>Created Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in requestdata %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.request_title }}</td>
+            <td>{{ i.request_content }}</td>
+            <td>{{ i.place_id.district.district_name }}</td>
+            <td>{{ i.place_id.place_name }}</td>
+            <td>
+                {% if i.request_emergency == 1 %}
+                    Emergency
+                {% else %}
+                    Normal
+                {% endif %}
+            </td>
+            <td>{{ i.request_todate }}</td>
+            <td>{{ i.request_date }}</td>
+            <td>
+                {% if i.request_status == 0 %}
+                    Pending
+                {% elif i.request_status == 1 %}
+                    Accepted
+                {% elif i.request_status == 2 %}
+                    Completed
+                {% else %}
+                    Rejected
+                {% endif %}
+            </td>
+            <td>
+                {% if i.request_status == 1 %}
+                    <a href="{% url 'User:ViewMembers' i.id %}">View Volunteers</a>
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="10" align="center">No Requests Found</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

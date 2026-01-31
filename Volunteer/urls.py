@@ -14,7 +14,6 @@ urlpatterns = [path("HomePage/",views.HomePage,name="HomePage"),
                path("ViewItem/<int:id>",views.ViewItem,name="ViewItem"),
                path("Donate/<int:id>",views.Donate,name="Donate"),
                path("PaymentPage/",views.PaymentPage,name="Payment"),
-               path("DonationPayment/",views.DonationPayment,name="DonationPayment"),
 
 
                path("logout/",views.logout,name="logout"),
@@ -29,4 +28,8 @@ urlpatterns = [path("HomePage/",views.HomePage,name="HomePage"),
                path("updatestatus/<int:id>/<int:status>",views.updatestatus,name="updatestatus"),
                path("Team/",views.Team,name="Team"),
                path("delteam/<int:id>",views.delteam,name="delteam"),
+
+               path("ViewMyTask/", views.ViewMyTask, name="ViewMyTask"),
+path("AssignMembers/<int:rid>/", views.AssignMembers, name="AssignMembers"),
+
                ]

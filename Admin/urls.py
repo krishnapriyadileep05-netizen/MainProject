@@ -33,7 +33,7 @@ path('VolunteerList/',views.VolunteerList,name="VolunteerList"),
 path('acceptlist/<int:id>',views.acceptvolunteer,name="acceptlist"),
 path('rejectlist/<int:id>',views.rejectvolunteer,name="rejectlist"),
 
-path('ViewRequest/',views.ViewRequest,name="ViewRequest"),
+path('ViewRequest/',views.viewrequest,name="ViewRequest"),
 path('acceptrequest/<int:id>',views.acceptrequest,name="acceptrequest"),
 path('rejectrequest/<int:id>',views.rejectrequest,name="rejectrequest"),
 
@@ -61,5 +61,6 @@ path('view-donation/', views.ViewDonation, name='ViewDonation'),
 path('send-selected-collection/', views.SendSelectedCollection, name='SendSelectedCollection'),
 path('send-all-collection/', views.SendAllCollection, name='SendAllCollection'),
 
-path('ViewMembers/<int:id>', views.ViewMembers, name='ViewMembers'),
+path('ViewMembers/<int:rid>', views.ViewMembers, name='ViewMembers'),
+path('DonationReport/', views.DonationReport, name='DonationReport'),
 ]

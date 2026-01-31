@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2 align="center">Volunteers Coming</h2>
+
+    <table border="1" align="center">
+        <tr>
+            <th>SI.NO</th>
+            <th>Volunteer Name</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <th>Team Members</th>
+        </tr>
+
+        {% for v in volunteers %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ v.volunteer_id.volunteer_name }}</td>
+            <td>{{ v.volunteer_id.volunteer_contact }}</td>
+            <td>
+                {% if v.response_status == 1 %}
+                Accepted
+                {% elif v.response_status == 2 %}
+                On Going
+                {% elif v.response_status == 3 %}
+                Completed
+                {% else %}
+                Pending
+                {% endif %}
+            </td>
+
+            <td>
+                <ul>
+                    {% for m in taskmembers %}
+                    {% if m.response_id.id == v.id %}
+                    <li>
+                        {{ m.team_id.team_name }}
+                        ({{ m.team_id.team_contact }})
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" align="center">No Volunteers Yet</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+
+</html>

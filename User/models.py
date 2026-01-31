@@ -19,6 +19,7 @@ class tbl_request(models.Model):
     request_status=models.IntegerField(default=0)
     place_id=models.ForeignKey(tbl_place,on_delete=models.CASCADE)
     user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
+    request_emergency=models.IntegerField(default=0)
 
 class tbl_feedback(models.Model):
     feedback_date=models.DateField(auto_now_add=True)
@@ -29,6 +30,7 @@ class tbl_payment(models.Model):
     payment_amount=models.CharField(max_length=50)
     payment_date=models.DateField(auto_now_add=True)
     user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
+  
 
 
     

@@ -3,29 +3,50 @@ from Admin.models import *
 from Guest.models import *
 from User.models import *
 from Volunteer.models import *
+from datetime import date, timedelta
+from django.db.models import Sum
 
 # Create your views here.
 def logout(request):
     del request.session["aid"]
     return redirect("Guest:Login")
 
-
 def AdminRegistration(request):
-    data=tbl_admin.objects.all()
+    data = tbl_admin.objects.all()
 
-    if request.method=="POST":
-        name=request.POST.get("txt_name")
-        email=request.POST.get("txt_email")
-        password=request.POST.get("txt_password")
+    if request.method == "POST":
+        name = request.POST.get("txt_name")
+        email = request.POST.get("txt_email")
+        password = request.POST.get("txt_password")
+        confirm = request.POST.get("txt_confirm")   # ✅ added
+
+        if password != confirm:   # ✅ added
+            return render(
+                request,
+                'Admin/AdminRegistration.html',
+                {'msg': "Password and Confirm Password do not match"}
+            )
 
         checkemail = tbl_admin.objects.filter(admin_email=email).count()
         if checkemail > 0:
-            return render(request,'Admin/AdminRegistration.html',{'msg':"Email Already Exist"})
+            return render(
+                request,
+                'Admin/AdminRegistration.html',
+                {'msg': "Email Already Exist"}
+            )
         else:
-            tbl_admin.objects.create(admin_name=name,admin_email=email,admin_password=password)
-            return render(request,'Admin/AdminRegistration.html',{'msg':'data inserted'})
+            tbl_admin.objects.create(
+                admin_name=name,
+                admin_email=email,
+                admin_password=password
+            )
+            return render(
+                request,
+                'Admin/AdminRegistration.html',
+                {'msg': 'Data inserted'}
+            )
     else:
-        return render(request,'Admin/AdminRegistration.html',{"AdminRegistration":data})
+        return render(request, 'Admin/AdminRegistration.html', {"AdminRegistration": data})
 
 def HomePage(request):
     if "aid" not in request.session:
@@ -194,15 +215,37 @@ def rejectvolunteer(request,id):
     vdata.save()
     return redirect("Admin:VolunteerList")
 
-def ViewRequest(request):
+def viewrequest(request):
     if "aid" not in request.session:
         return redirect("Guest:Login")
-    else:
-        pending=tbl_request.objects.filter(request_status = 0)
-        accept=tbl_request.objects.filter(request_status = 1)
-        reject=tbl_request.objects.filter(request_status = 2)
 
-    return render(request,'Admin/ViewRequest.html',{"pending":pending,"accept":accept,"reject":reject})
+    today = date.today()
+    upcoming_days = today + timedelta(days=3)
+
+    pending_raw = tbl_request.objects.filter(request_status=0)
+    accept_raw = tbl_request.objects.filter(request_status=1)
+    reject_raw = tbl_request.objects.filter(request_status=2)
+
+    # Process pending
+    pending = []
+    for r in pending_raw:
+        if r.request_todate >= today:
+            r.is_important = today <= r.request_todate <= upcoming_days
+            pending.append(r)
+
+    # Process accepted
+    accept = []
+    for r in accept_raw:
+        if r.request_todate >= today:
+            r.is_important = today <= r.request_todate <= upcoming_days
+            accept.append(r)
+
+    return render(request, 'Admin/ViewRequest.html', {
+        "pending": pending,
+        "accept": accept,
+        "reject": reject_raw
+    })
+
 
 def acceptrequest(request,id):
     rdata=tbl_request.objects.get(id=id)
@@ -393,9 +436,37 @@ def ViewUserDonation(request):
     paymentdata=tbl_payment.objects.all()
     return render(request,"Admin/ViewUserDonation.html",{"paymentdata":paymentdata})
 
-def ViewMembers(request,id):
-    
-    memberdata=tbl_team.objects.filter(volunteer_id=id)
-    return render(request,"Admin/ViewMembers.html",{'memberdata':memberdata})
+def ViewMembers(request, rid):
+    memberdata = tbl_taskmember.objects.filter(
+        response_id_id=rid
+    )
+    return render(request, "Admin/ViewMembers.html", {
+        "memberdata": memberdata
+    })
 
 
+
+
+def DonationReport(request):
+    if "aid" not in request.session:
+        return redirect("Guest:Login")
+
+    today = date.today()
+
+    total_amount = tbl_payment.objects.aggregate(
+        total=Sum('payment_amount')
+    )['total'] or 0
+
+    today_amount = tbl_payment.objects.filter(
+        payment_date=today
+    ).aggregate(
+        total=Sum('payment_amount')
+    )['total'] or 0
+
+    paymentdata = tbl_payment.objects.all().order_by('-payment_date')
+
+    return render(request, "Admin/DonationReport.html", {
+        "total_amount": total_amount,
+        "today_amount": today_amount,
+        "paymentdata": paymentdata
+    })

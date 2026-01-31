@@ -62,3 +62,7 @@ class tbl_team(models.Model):
     team_dob=models.DateField()
     team_contact=models.CharField(max_length=100)
     volunteer_id=models.ForeignKey(tbl_volunteer,on_delete=models.CASCADE)
+
+class tbl_taskmember(models.Model):
+    response_id = models.ForeignKey(tbl_response, on_delete=models.CASCADE)
+    team_id = models.ForeignKey(tbl_team, on_delete=models.CASCADE)

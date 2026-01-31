@@ -1,46 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewRequest</title>
+    <title>View Request</title>
+
+    <style>
+        .important {
+            background-color: #ffe699;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        
-            <h2 style="text-align: center;">Request</h2>
-        <table border="1" align="center">
-            <tr>
-                <td>SI.NO</td>
-                <td>Title</td>
-                <td>Content</td>
-                <td>District</td>
-                <td>Place</td>
-                <td>Date</td>
-                <td>To Date</td>
-                <td>Action</td>
-            </tr>
-            {% for i in requestdata %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{i.request_title}}</td>
-                <td>{{i.request_content}}</td>
-                <td>{{i.place_id.district.district_name}}</td>
-                <td>{{i.place_id.place_name}}</td>
-                <td>{{i.request_date}}</td>
-                <td>{{i.request_todate}}</td>
-                <td><a href="{% url 'Volunteer:Join' i.id %}">Join</a></td>
-                
-            </tr>
-            {% endfor %}
-        </table>
-    </form>
-</body>
-{% if msg %}
-<script>
-    alert("{{msg}}")
-    window.location="{% url 'Volunteer:ViewRequest' %}";
-</script>
+
+    <h2 style="text-align: center;">Available Requests</h2>
+
+    <table border="1" align="center">
+        <tr>
+            <th>SI.NO</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Date</th>
+            <th>To Date</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in requestdata %}
+        <tr {% if i.is_important %}class="important" {% endif %}>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.request_title }}</td>
+            <td>{{ i.request_content }}</td>
+            <td>{{ i.place_id.district.district_name }}</td>
+            <td>{{ i.place_id.place_name }}</td>
+            <td>{{ i.request_date }}</td>
+            <td>{{ i.request_todate }}</td>
+            <td>
+                {% if not i.joined %}
+                <a href="{% url 'Volunteer:Join' i.id %}">Join</a>
+                {% else %}
+                Joined
+                {% endif %}
+            </td>
+
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8" align="center">No Requests Available</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if msg %}
+    <script>
+        alert("{{ msg }}");
+        window.location = "{% url 'Volunteer:ViewRequest' %}";
+    </script>
     {% endif %}
+
+</body>
+
 </html>

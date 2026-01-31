@@ -3,49 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewResponse</title>
+    <title>View Response</title>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table border="1" align="center">
-          <tr>
-            <td>SI.NO</td>
-            
-            <td>REQUEST TYPE</td>
-            <td>District</td>
-            <td>Place</td>
-            <td>VOLUNTEER NAME</td>
-            <td>VOLUNTEER CONTACT</td>
-            <td>DATE</td>
-            <td>STATUS</td>
-            <td>Action</td>
-        </tr>
-        {% for i in responsedata %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-           
-            <td>{{ i.request_id.request_title }}</td>
-            <td>{{i.request_id.place_id.district.district_name}}</td>
-            <td>{{i.request_id.place_id.place_name}}</td>
-            <td>{{ i.volunteer_id.volunteer_name }}</td>
-            <td>{{ i.volunteer_id.volunteer_contact }}</td>
-            <td>{{ i.response_date }}</td>
-            <td>{% if i.response_status == 1 %} Accepted
-                {% elif i.response_status == 2 %} On Going
-                {% elif i.response_status == 3 %} Completed
-                {% else %}
+
+<h2 style="text-align:center;">Response List</h2>
+
+<table border="1" align="center">
+    <tr>
+        <th>SI.NO</th>
+        <th>Request Type</th>
+        <th>District</th>
+        <th>Place</th>
+        <th>Volunteer Name</th>
+        <th>Volunteer Contact</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in responsedata %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.request_id.request_title }}</td>
+        <td>{{ i.request_id.place_id.district.district_name }}</td>
+        <td>{{ i.request_id.place_id.place_name }}</td>
+        <td>{{ i.volunteer_id.volunteer_name }}</td>
+        <td>{{ i.volunteer_id.volunteer_contact }}</td>
+        <td>{{ i.response_date }}</td>
+        <td>
+            {% if i.response_status == 1 %}
+                Accepted
+            {% elif i.response_status == 2 %}
+                On Going
+            {% elif i.response_status == 3 %}
+                Completed
+            {% else %}
                 N/A
-                {% endif %}
-            </td>
-            <td><a href="{% url 'Admin:ViewMembers' i.id %}">View Members</a></td>
-            
-        </tr> 
-        
-        {% endfor %}
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'Admin:ViewMembers' i.id %}">View Members</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="9" align="center">No Responses Found</td>
+    </tr>
+    {% endfor %}
 
+</table>
 
-        </table>
-    </form>
 </body>
 </html>

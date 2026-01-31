@@ -8,40 +8,50 @@
 </head>
 
 <body>
-    <h2>Nearby Collection Requests</h2>
+   <h2 align="center">Nearby Collection Requests</h2>
 
-    <table border="1">
-        <tr>
-            <td>Donator</td>
-            <td>Item</td>
-            <td>Quantity</td>
-            <td>District</td>
-            <td>Delivery Place</td>
-            <td>Contact</td>
-            <td>Action</td>
-        </tr>
+<table border="1" align="center">
+<tr>
+    <th>Donator</th>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>District</th>
+    <th>Delivery Place</th>
+    <th>Contact</th>
+    <th>Action</th>
+</tr>
 
-        {% for r in requests %}
-        <tr>
-            <td>{{ r.donation_id.user_id.user_name }}</td>
-            <td>{{ r.donation_id.donationitem_id.donationitems_name }}</td>
-            <td>{{ r.donation_id.donation_amount }}</td>
-            <td>{{ r.donation_id.user_id.place.district.district_name }}</td>
-            <td>{{ r.donation_id.user_id.place.place_name }}</td>
-            <td>{{ r.donation_id.user_id.user_contact }}</td>
-            <td>
-                {% if r.status == 0 %}
-                <a href="{% url 'Volunteer:TakeRequest' r.id %}">
-                    Take Request
-                </a>
-                {% elif r.status == 1 %}
-                <span>Request Accepted</span>
-                {% endif %}
-                
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+{% for r in requests %}
+<tr>
+    <td>{{ r.donation_id.user_id.user_name }}</td>
+    <td>{{ r.donation_id.donationitem_id.donationitems_name }}</td>
+    <td>{{ r.donation_id.donation_amount }}</td>
+    <td>{{ r.donation_id.user_id.place.district.district_name }}</td>
+    <td>{{ r.donation_id.user_id.place.place_name }}</td>
+    <td>{{ r.donation_id.user_id.user_contact }}</td>
+
+    <td>
+        {% if r.status == 0 %}
+            <a href="{% url 'Volunteer:TakeRequest' r.id %}">
+                Take Request
+            </a>
+
+        {% elif r.status == 1 %}
+            <strong>Request Accepted</strong>
+
+        {% else %}
+            <span>Closed</span>
+        {% endif %}
+    </td>
+</tr>
+
+{% empty %}
+<tr>
+    <td colspan="7" align="center">No Nearby Requests</td>
+</tr>
+{% endfor %}
+</table>
+
 
 </body>
 
