@@ -62,9 +62,11 @@ def AjaxPlace(request):
     return render(request,'Guest/AjaxPlace.html',{"place":place})
 
 def Login(request):
+    
     if request.method == "POST":
         email=request.POST.get("txt_email")
         password=request.POST.get("txt_password")
+    
 
         admincount=tbl_admin.objects.filter(admin_email=email,admin_password=password).count()
         usercount=tbl_user.objects.filter(user_email=email,user_password=password).count()
@@ -89,6 +91,9 @@ def Login(request):
         return render(request,'Guest/Login.html')
             
 def Volunteer(request):
+    if "vid" not in request.session:
+        return redirect("Guest:Login")
+    
     district = tbl_district.objects.all()
     place = tbl_place.objects.all()
 
@@ -96,7 +101,7 @@ def Volunteer(request):
         name = request.POST.get("txt_name")
         email = request.POST.get("txt_email")
         password = request.POST.get("txt_password")
-        confirm = request.POST.get("txt_confirm")  # fixed typo: POst -> POST
+        confirm = request.POST.get("txt_confirm") 
         photo = request.FILES.get("file_photo")
         proof = request.FILES.get("file_proof")
         address = request.POST.get("txt_address")

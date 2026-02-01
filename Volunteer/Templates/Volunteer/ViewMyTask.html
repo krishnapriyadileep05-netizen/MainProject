@@ -37,7 +37,7 @@
 
             {% elif i.response_status == 2 %}
                 In Progress <br>
-                <a href="{% url 'Volunteer:Completed' i.id %}">Mark Completed</a>
+                <a href="{% url 'Volunteer:Completed' i.id %}">Work Completed</a>
 
             {% elif i.response_status == 3 %}
                 Completed

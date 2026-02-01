@@ -18,9 +18,9 @@ def AdminRegistration(request):
         name = request.POST.get("txt_name")
         email = request.POST.get("txt_email")
         password = request.POST.get("txt_password")
-        confirm = request.POST.get("txt_confirm")   # ✅ added
+        confirm = request.POST.get("txt_confirm")  
 
-        if password != confirm:   # ✅ added
+        if password != confirm:  
             return render(
                 request,
                 'Admin/AdminRegistration.html',
@@ -305,7 +305,7 @@ def DonationRequest(request):
     if request.method == "POST":
         details = request.POST.get("txt_details")
         place = tbl_place.objects.get(id=request.POST.get("sel_place"))
-        user = tbl_user.objects.get(id=request.session["aid"])
+        user = tbl_user.objects.get(id=request.session["uid"])
 
         tbl_donationrequest.objects.create(
             donationrequest_details=details,

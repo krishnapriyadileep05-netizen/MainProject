@@ -339,6 +339,7 @@ def Team(request):
         tbl_team.objects.create(
             team_name=request.POST.get("txt_name"),
             team_photo=request.FILES.get("file_photo"),
+            team_address=request.POST.get("txt_address"),
             team_gender=request.POST.get("txt_gender"),
             team_dob=request.POST.get("txt_date"),
             team_contact=request.POST.get("txt_contact"),

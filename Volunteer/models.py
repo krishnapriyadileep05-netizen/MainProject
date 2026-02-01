@@ -58,6 +58,7 @@ class tbl_collectionrequest(models.Model):
 class tbl_team(models.Model):
     team_name=models.CharField(max_length=100)
     team_photo=models.FileField(upload_to="Assets/VolunteerDocs/")
+    team_address=models.CharField(max_length=100)
     team_gender=models.CharField(max_length=100)
     team_dob=models.DateField()
     team_contact=models.CharField(max_length=100)
