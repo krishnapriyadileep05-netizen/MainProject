@@ -71,41 +71,31 @@ def ChangePassword(request):
     return render(request, 'Volunteer/ChangePassword.html')
 
 
-# ---------------- REQUESTS ----------------
+
 def viewrequest(request):
     if "vid" not in request.session:
         return redirect("Guest:Login")
 
     volunteer = tbl_volunteer.objects.get(id=request.session["vid"])
     today = date.today()
-
-    # Requests that are accepted and NOT expired
     requests = tbl_request.objects.filter(
         request_status=1,
+        request_type=1,
         request_todate__gte=today
     )
-
     requestdata = []
-
     for req in requests:
-        already_joined = tbl_response.objects.filter(
+        req.joined = tbl_response.objects.filter(
             request_id=req,
             volunteer_id=volunteer
         ).exists()
 
-        req.joined = already_joined
-
-        # Important if near deadline (2 days)
-        days_left = (req.request_todate - today).days
-        req.is_important = days_left <= 2
-
+        req.is_important = (req.request_todate - today).days <= 2
         requestdata.append(req)
 
-    return render(
-        request,
-        'Volunteer/ViewRequest.html',
-        {"requestdata": requestdata}
-    )
+    return render(request, 'Volunteer/ViewRequest.html', {
+        "requestdata": requestdata
+    })
 
 
 def join(request, id):
@@ -122,7 +112,7 @@ def join(request, id):
         request_id=req,
         volunteer_id=volunteer
     )
-    return redirect("Volunteer:ViewRequest")
+    return redirect("Volunteer:ViewMyTask")
 
 
 # ---------------- DONATION REQUEST ----------------

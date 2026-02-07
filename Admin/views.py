@@ -5,7 +5,7 @@ from User.models import *
 from Volunteer.models import *
 from datetime import date, timedelta
 from django.db.models import Sum
-
+from django.db.models import Count
 # Create your views here.
 def logout(request):
     del request.session["aid"]
@@ -192,6 +192,12 @@ def UserList(request):
     else:
         userdata=tbl_user.objects.all()
         return render(request,'Admin/UserList.html',{"users":userdata,})
+    
+def blockuser(request,id):
+    udata=tbl_user.objects.get(id=id)
+    udata.user_status=1
+    udata.save()
+    return redirect("Admin:UserList")
 
 
 def VolunteerList(request):
@@ -226,18 +232,19 @@ def viewrequest(request):
     accept_raw = tbl_request.objects.filter(request_status=1)
     reject_raw = tbl_request.objects.filter(request_status=2)
 
-    # Process pending
     pending = []
     for r in pending_raw:
         if r.request_todate >= today:
             r.is_important = today <= r.request_todate <= upcoming_days
             pending.append(r)
 
-    # Process accepted
     accept = []
     for r in accept_raw:
         if r.request_todate >= today:
             r.is_important = today <= r.request_todate <= upcoming_days
+
+            r.response_count = tbl_response.objects.filter(request_id=r).count()
+
             accept.append(r)
 
     return render(request, 'Admin/ViewRequest.html', {
@@ -246,18 +253,31 @@ def viewrequest(request):
         "reject": reject_raw
     })
 
-
-def acceptrequest(request,id):
-    rdata=tbl_request.objects.get(id=id)
-    rdata.request_status=1
-    rdata.save()
+def acceptrequest(request, id):
+    if request.method == "POST":
+        rdata = tbl_request.objects.get(id=id)
+        rdata.request_status = 1
+        rdata.request_message = request.POST.get("txt_message")
+        rdata.save()
     return redirect('Admin:ViewRequest')
 
-def rejectrequest(request,id):
-    rdata=tbl_request.objects.get(id=id)
-    rdata.request_status=2
-    rdata.save()
+
+def rejectrequest(request, id):
+    if request.method == "POST":
+        rdata = tbl_request.objects.get(id=id)
+        rdata.request_status = 2
+        rdata.request_message = request.POST.get("txt_message")
+        rdata.save()
     return redirect('Admin:ViewRequest')
+
+
+
+def closerequest(request, id):
+    req = tbl_request.objects.get(id=id)
+    req.request_status = 2
+    req.save()
+    return redirect('Admin:ViewRequest')
+
 
 def ViewResponse(request,id):
     responsedata=tbl_response.objects.filter(request_id=id)

@@ -6,7 +6,7 @@
     <title>UserList</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
          {% csrf_token %}
         <table border="1" align="center">
             <tr>
@@ -29,8 +29,12 @@
                 <td>{{ i.user_address }}</td>
                 <td>{{ i.place.district.district_name }}</td>
                 <td>{{ i.place.place_name }}</td>
-                <td>{{ i.user_photo }}</td>
-                <td></td>
+                <td><img src="{{ i.user_photo.url }}" width="70" height="70" alt=""></td>
+                <td>
+                    {% if i.user_status == 0 %}
+                    <a href="{% url 'Admin:blockuser' i.id %}">Block</a>
+                {% else %} Blocked
+            {% endif %}</td>
             </tr>
             {% endfor %}
         </table>

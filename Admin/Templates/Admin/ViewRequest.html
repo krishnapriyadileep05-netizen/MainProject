@@ -2,15 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Requests</title>
+
     <style>
-        .important { background-color: #ffeb99; font-weight: bold; }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .important {
+            background-color: #ffeb99;
+            font-weight: bold;
+        }
+        /* Modal */
+        #actionModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background: #fff;
+            width: 400px;
+            margin: 120px auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
     </style>
 </head>
+
 <body>
 
-<h2 style="text-align: center;">Pending Requests</h2>
+<h2 align="center">Pending Requests</h2>
 <table border="1" align="center">
     <tr>
         <th>SI.NO</th>
@@ -18,35 +47,37 @@
         <th>Content</th>
         <th>District</th>
         <th>Place</th>
+        <th>Type</th>
         <th>Date</th>
         <th>To Date</th>
         <th>Action</th>
     </tr>
 
     {% for i in pending %}
-    <tr {% if i.is_important %}class="important"{% endif %}>
+    <tr {% if i.request_type == 1 %}class="important"{% endif %}>
         <td>{{ forloop.counter }}</td>
         <td>{{ i.request_title }}</td>
         <td>{{ i.request_content }}</td>
         <td>{{ i.place_id.district.district_name }}</td>
         <td>{{ i.place_id.place_name }}</td>
+        <td>{% if i.request_type == 1 %}Emergency{% else %}Donation{% endif %}</td>
         <td>{{ i.request_date }}</td>
         <td>{{ i.request_todate }}</td>
         <td>
-            <a href="{% url 'Admin:acceptrequest' i.id %}">Accept</a> |
-            <a href="{% url 'Admin:rejectrequest' i.id %}">Reject</a>
+            <a href="#" onclick="openModal('accept', {{ i.id }})">Accept</a> |
+            <a href="#" onclick="openModal('reject', {{ i.id }})">Reject</a>
         </td>
     </tr>
     {% empty %}
     <tr>
-        <td colspan="8" align="center">No Pending Requests</td>
+        <td colspan="9">No Pending Requests</td>
     </tr>
     {% endfor %}
 </table>
 
 <br><br>
 
-<h2 style="text-align: center;">Accepted Requests</h2>
+<h2 align="center">Accepted Requests</h2>
 <table border="1" align="center">
     <tr>
         <th>SI.NO</th>
@@ -69,19 +100,22 @@
         <td>{{ i.request_date }}</td>
         <td>{{ i.request_todate }}</td>
         <td>
-            <a href="{% url 'Admin:ViewResponse' i.id %}">View Response</a>
+            <a href="{% url 'Admin:ViewResponse' i.id %}">
+                View Response ({{ i.response_count }})
+            </a> |
+            <a href="{% url 'Admin:closerequest' i.id %}">Close</a>
         </td>
     </tr>
     {% empty %}
     <tr>
-        <td colspan="8" align="center">No Accepted Requests</td>
+        <td colspan="8">No Accepted Requests</td>
     </tr>
     {% endfor %}
 </table>
 
 <br><br>
 
-<h2 style="text-align: center;">Rejected Requests</h2>
+<h2 align="center">Rejected Requests</h2>
 <table border="1" align="center">
     <tr>
         <th>SI.NO</th>
@@ -89,28 +123,62 @@
         <th>Content</th>
         <th>District</th>
         <th>Place</th>
+        <th>Type</th>
         <th>Date</th>
-        <th>Action</th>
     </tr>
 
     {% for i in reject %}
-    <tr>
+    <tr {% if i.request_type == 1 %}class="important"{% endif %}>
         <td>{{ forloop.counter }}</td>
         <td>{{ i.request_title }}</td>
         <td>{{ i.request_content }}</td>
         <td>{{ i.place_id.district.district_name }}</td>
         <td>{{ i.place_id.place_name }}</td>
+        <td>{% if i.request_type == 1 %}Emergency{% else %}Donation{% endif %}</td>
         <td>{{ i.request_date }}</td>
-        <td>
-            <a href="{% url 'Admin:acceptrequest' i.id %}">Accept</a>
-        </td>
     </tr>
     {% empty %}
     <tr>
-        <td colspan="7" align="center">No Rejected Requests</td>
+        <td colspan="7">No Rejected Requests</td>
     </tr>
     {% endfor %}
 </table>
+
+<!-- MODAL -->
+<div id="actionModal">
+    <div class="modal-content">
+        <h3 id="modalTitle"></h3>
+
+        <form method="post" id="actionForm">
+            {% csrf_token %}
+            <textarea name="txt_message" required placeholder="Enter message"
+                      style="width:100%; height:80px;"></textarea><br><br>
+
+            <input type="submit" value="Submit">
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openModal(action, id) {
+    document.getElementById("actionModal").style.display = "block";
+
+    let title = action === "accept" ? "Accept Request" : "Reject Request";
+    document.getElementById("modalTitle").innerText = title;
+
+    let form = document.getElementById("actionForm");
+    if (action === "accept") {
+        form.action = "/Admin/acceptrequest/" + id + "";
+    } else {
+        form.action = "/Admin/rejectrequest/" + id + "";
+    }
+}
+
+function closeModal() {
+    document.getElementById("actionModal").style.display = "none";
+}
+</script>
 
 </body>
 </html>

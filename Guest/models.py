@@ -8,6 +8,7 @@ class tbl_user(models.Model):
     user_password=models.CharField(max_length=50)
     user_photo=models.FileField(upload_to="Assets/UserDocs/")
     place=models.ForeignKey(tbl_place,on_delete=models.CASCADE)
+    user_status=models.IntegerField(default=0)
   
 class tbl_volunteer(models.Model):
     

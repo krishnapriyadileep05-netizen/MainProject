@@ -30,12 +30,15 @@ path('editsub/<int:id>',views.editsub,name="editsub"),
 
 path('UserList/',views.UserList,name="UserList"),
 path('VolunteerList/',views.VolunteerList,name="VolunteerList"),
+path('blockuser/<int:id>',views.blockuser,name="blockuser"),
+
 path('acceptlist/<int:id>',views.acceptvolunteer,name="acceptlist"),
 path('rejectlist/<int:id>',views.rejectvolunteer,name="rejectlist"),
 
 path('ViewRequest/',views.viewrequest,name="ViewRequest"),
 path('acceptrequest/<int:id>',views.acceptrequest,name="acceptrequest"),
 path('rejectrequest/<int:id>',views.rejectrequest,name="rejectrequest"),
+path('closerequest/<int:id>',views.closerequest,name="closerequest"),
 
 path('ViewResponse/<int:id>',views.ViewResponse,name="ViewResponse"),
 

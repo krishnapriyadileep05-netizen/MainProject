@@ -12,14 +12,16 @@ class tbl_complaint(models.Model):
     complaint_reply=models.CharField(max_length=50,null=True)
 
 class tbl_request(models.Model):
-    request_title=models.CharField(max_length=50)
-    request_content=models.CharField(max_length=100)
-    request_date=models.DateField(auto_now_add=True)
-    request_todate=models.DateField()
-    request_status=models.IntegerField(default=0)
-    place_id=models.ForeignKey(tbl_place,on_delete=models.CASCADE)
-    user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
-    request_emergency=models.IntegerField(default=0)
+    request_title = models.CharField(max_length=50)
+    request_content = models.CharField(max_length=100)
+    request_date = models.DateField(auto_now_add=True)
+    request_todate = models.DateField()
+    request_status = models.IntegerField(default=0)
+    request_type = models.IntegerField(default=0)  
+    place_id = models.ForeignKey(tbl_place, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(tbl_user, on_delete=models.CASCADE)
+    request_message = models.CharField(max_length=255, blank=True, null=True)
+
 
 class tbl_feedback(models.Model):
     feedback_date=models.DateField(auto_now_add=True)

@@ -83,8 +83,13 @@ def Login(request):
             return redirect("User:HomePage")
         elif volunteercount>0:
             volunteerdata=tbl_volunteer.objects.get(volunteer_email=email,volunteer_password=password)
-            request.session["vid"]=volunteerdata.id
-            return redirect("Volunteer:HomePage")
+            if volunteerdata.volunteer_status == 1:
+                request.session["vid"]=volunteerdata.id
+                return redirect("Volunteer:HomePage")
+            elif volunteerdata.volunteer_status == 2:
+                return render(request,'Guest/Login.html',{'msg':' Your Account is Blocked My Admin. '})
+            else :
+                return render(request,'Guest/Login.html',{'msg':' Your Account Verification is Pending... '})
         else:
             return render(request,'Guest/Login.html',{'msg':' Invalid Email or Password '})
     else:

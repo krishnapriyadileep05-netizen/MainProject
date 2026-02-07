@@ -70,20 +70,21 @@ def Complaint(request):
 def Request(request):
     if "uid" not in request.session:
         return redirect("Guest:Login")
-    district=tbl_district.objects.all()
-    requestdata=tbl_request.objects.filter(user_id=request.session["uid"])
-    if request.method=="POST":
-        emergency=1 if request.POST.get("chk_emergency") else 0
+    district = tbl_district.objects.all()
+    requestdata = tbl_request.objects.filter(user_id=request.session["uid"])
+    if request.method == "POST":
+        req_type = int(request.POST.get("req_type"))  
         tbl_request.objects.create(
             request_title=request.POST.get("txt_title"),
             request_content=request.POST.get("txt_content"),
             request_todate=request.POST.get("txt_date"),
-            request_emergency=emergency,
+            request_type=req_type,
             place_id=tbl_place.objects.get(id=request.POST.get("sel_place")),
             user_id=tbl_user.objects.get(id=request.session["uid"])
         )
         return redirect("User:MyRequest")
-    return render(request,'User/request.html',{'district':district,'requestdata':requestdata})
+    return render(request, 'User/request.html', {'district': district,'requestdata': requestdata})
+
 
 
 def ViewDonationRequest(request):

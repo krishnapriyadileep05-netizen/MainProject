@@ -24,7 +24,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ i.team_id.team_name }}</td>
-           <td><img src="{{ i.volunteer_photo.url }}" width="80" height="80" alt=""></td>
+           <td><img src="{{ i.team_id.volunteer_id.volunteer_photo.url }}" width="80" height="80" alt=""></td>
             <td>{{ i.team_id.team_address }}</td>
             <td>{{ i.team_id.team_contact }}</td>
         </tr>
