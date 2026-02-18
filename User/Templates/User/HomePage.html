@@ -100,11 +100,10 @@
                                     <a href="{% url 'User:Request' %}" class="dropdown-item">Request</a>
                                     <a href="{% url 'User:MyRequest' %}" class="dropdown-item">My Request</a>
                                     <a href="{% url 'User:ViewCamp' %}" class="dropdown-item">View Camps</a>
+                                    <a href="{% url 'User:ViewDonationRequest' %}" class="nav-item nav-link">ViewDonationRequest</a>
 
 
                                 </div></div>
-                            <a href="{% url 'User:ViewDonationRequest' %}" class="nav-item nav-link">ViewDonationRequset</a>
-
                             <!-- <a href="service.html" class="nav-item nav-link">Services</a> -->
                             <a href="{% url 'User:MyProfile' %}" class="nav-item nav-link">My Profile</a>
                             <a href="{% url 'User:Complaint' %}" class="nav-item nav-link">Complaints</a>
@@ -119,6 +118,8 @@
                                 </div>
                             </div> -->
                             <a href="{% url 'User:Feedback' %}" class="nav-item nav-link">Feedback</a>
+                            <a href="{% url 'User:logout' %}" class="nav-item nav-link">Logout</a>
+
                         </div>
                         <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
                             <a href="{% url 'User:Payment' %}" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Donate Now</a>
