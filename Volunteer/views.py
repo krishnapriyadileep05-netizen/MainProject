@@ -84,6 +84,7 @@ def viewrequest(request):
         request_todate__gte=today
     )
     requestdata = []
+    print(requests)
     for req in requests:
         req.joined = tbl_response.objects.filter(
             request_id=req,

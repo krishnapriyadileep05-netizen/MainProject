@@ -85,19 +85,15 @@ def Request(request):
         return redirect("User:MyRequest")
     return render(request, 'User/request.html', {'district': district,'requestdata': requestdata})
 
-
-
 def ViewDonationRequest(request):
     if "uid" not in request.session:
         return redirect("Guest:Login")
     requestdata=tbl_donationrequest.objects.filter(donationrequest_status=0)
     return render(request,'User/ViewDonationRequest.html',{'requestdata':requestdata})
 
-
 def ViewItem(request,id):
     itemdata=tbl_donationitems.objects.filter(donationrequest_id=id)
     return render(request,'User/ViewItem.html',{'itemdata':itemdata})
-
 
 def Donate(request,id):
     if "uid" not in request.session:

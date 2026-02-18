@@ -1,9 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>View Donation</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f6f7fb;
+            padding: 25px;
+            color: #333;
+        }
+
+        table {
+            width: 95%;
+            margin: 25px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #153e77;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover td {
+            background-color: #f2f5fa;
+        }
+
+        button {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: #03c7dd;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        button:hover {
+            background-color: #5a79a6;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -11,14 +64,14 @@
 <form method="post" action="{% url 'Admin:SendSelectedCollection' %}">
     {% csrf_token %}
 
-    <center style="margin-bottom:10px;">
+    <center style="margin-bottom:15px;">
         <a href="{% url 'Admin:SendAllCollection' %}">
             <button type="button">Send ALL for Collection</button>
         </a>
         <button type="submit">Send Selected for Collection</button>
     </center>
 
-    <table border="1" align="center">
+    <table>
         <tr>
             <th>Select</th>
             <th>SI.NO</th>
@@ -33,8 +86,7 @@
 
         {% for i in viewdonationdata %}
         <tr>
-            <!-- CHECKBOX -->
-            <td align="center">
+            <td>
                 {% if i.tbl_collectionrequest_set.exists %}
                     <input type="checkbox" disabled>
                 {% else %}
@@ -44,7 +96,6 @@
 
             <td>{{ forloop.counter }}</td>
 
-            <!-- DONATOR -->
             <td>
                 {% if i.user_id %}
                     {{ i.user_id.user_name }}
@@ -58,7 +109,6 @@
             <td>{{ i.donation_amount }}</td>
             <td>{{ i.donation_date }}</td>
 
-            <!-- VOLUNTEER -->
             <td>
                 {% if i.tbl_collectionrequest_set.first %}
                     {% if i.tbl_collectionrequest_set.first.volunteer_id %}
@@ -71,7 +121,6 @@
                 {% endif %}
             </td>
 
-            <!-- STATUS -->
             <td>
                 {% if i.tbl_collectionrequest_set.first %}
                     {% if i.tbl_collectionrequest_set.first.status == 0 %}

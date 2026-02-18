@@ -1,3 +1,6 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +12,23 @@
             border-collapse: collapse;
             width: 90%;
         }
+
         th, td {
             padding: 8px;
             text-align: center;
         }
+
+        /* Navy Header */
+        th {
+            background-color: rgb(15, 59, 117);
+            color: white;
+        }
+
         .important {
             background-color: #ffeb99;
             font-weight: bold;
         }
+
         /* Modal */
         #actionModal {
             display: none;
@@ -27,6 +39,7 @@
             height: 100%;
             background: rgba(0,0,0,0.5);
         }
+
         .modal-content {
             background: #fff;
             width: 400px;
@@ -169,9 +182,9 @@ function openModal(action, id) {
 
     let form = document.getElementById("actionForm");
     if (action === "accept") {
-        form.action = "/Admin/acceptrequest/" + id + "";
+        form.action = "/Admin/acceptrequest/" + id;
     } else {
-        form.action = "/Admin/rejectrequest/" + id + "";
+        form.action = "/Admin/rejectrequest/" + id;
     }
 }
 
@@ -182,3 +195,4 @@ function closeModal() {
 
 </body>
 </html>
+{% endblock %}
